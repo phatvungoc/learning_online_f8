@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="wrapper">
+    <h2 class="heading"><i class="fas fa-th"></i> Instructor Dashboard</h2>
+    <div class="dashboard__info">
+      <div class="row justify-content-center">
+        <div class="col-lg-3">
+          <div class="dashboard__info__item" (click)="moveToTotalCourses()">
+            <h3>Khóa học:</h3>
+            <span>{{ courseCount }}<i class="fas fa-book"></i></span>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="dashboard__info__item">
+            <h3>Học viên:</h3>
+            <span>{{ studentCount }}<i class="fas fa-user-graduate"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard__create-course">
+      <div class="row justify-content-center">
+        <div class="col-lg-3">
+          <h3 class="dashboard__create-course__title">Create a new Course</h3>
+        </div>
+        <div class="col-lg-3">
+          <button class="dashboard__create-course__btn" (click)="moveToCreateCourse()">Create new Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

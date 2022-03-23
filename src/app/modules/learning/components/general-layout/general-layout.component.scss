@@ -1,0 +1,311 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+.H__header {
+  display: flex;
+  align-items: center;
+  height: 2.75rem;
+  background: #29303b;
+  width: 100%;
+  position: fixed;
+  z-index: 99999;
+
+  @media screen and (min-width: 46.25rem) {
+    height: 5.125rem;
+  }
+
+  &__logo {
+    display: none;
+    margin-left: 1rem;
+
+    @media screen and (min-width: 46.25rem) {
+      display: unset;
+    }
+
+    img {
+      height: 2.75rem;
+      display: inline;
+    }
+  }
+
+  &__divider {
+    display: none;
+    height: 40%;
+    margin-left: 1.5rem;
+    border-left: 1px solid #686f7a;
+
+    @media screen and (min-width: 46.25rem) {
+      display: unset;
+    }
+  }
+
+  &__back-btn {
+    width: 5.75rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.5rem;
+  }
+
+  &__title {
+    padding-right: 1rem;
+    font-size: 2rem;
+    line-height: 2.625rem;
+    height: 2.5rem;
+    color: #fff;
+    overflow: hidden;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+
+    @media screen and (min-width: 46.25rem) {
+      margin-left: 1.5rem;
+    }
+  }
+
+  &__guide {
+    font-size: 1.875rem;
+    color: #dce0e3;
+    margin-left: auto;
+    margin-right: 2rem;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+main {
+  padding-top: 2.75rem;
+  position: relative;
+  height: 300rem;
+
+  @media screen and (min-width: 46.25rem) {
+    padding-top: 3.125rem;
+  }
+
+  .main-wrapper {
+    @media screen and (min-width: 64rem) {
+      width: 75%;
+    }
+  }
+
+  .H__learning-video {
+    background: #000;
+    margin-top: 2rem;
+
+    @media screen and (min-width: 46.25rem) {
+      padding-left: 8.5%;
+      padding-right: 8.5%;
+    }
+
+    &__wrapper {
+      position: relative;
+      overflow: hidden;
+      padding-top: 56.25%;
+
+      .video-current {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .sub-video__scroll {
+    position: fixed;
+    top: 9rem;
+    left: 51rem;
+    color: white;
+    z-index: 99999999;
+    font-family: 'Montserrat',Arial,Helvetica,sans-serif;
+
+    &__title {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    &__sub-title {
+      color: hsla(0,0%,100%,.7);
+      font-size: 1.6rem;
+      margin-top: 0.8rem;
+    }
+
+    &__duration {
+      color: hsla(0,0%,100%,.7);
+      font-size: 1.6rem;
+      margin-top: 0.8rem;
+    }
+  }
+
+  .H__learning-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.6rem;
+    min-height: 5.8rem;
+    box-shadow: inset 0 -1px 0 0 #dcdacb;
+    position: sticky;
+    top: 4.4rem;
+    background: #fff;
+    z-index: 9999;
+
+    @media screen and (min-width: 740px) {
+      width: 100%;
+      padding: 0 8.5%;
+      margin: 0 auto;
+    }
+
+    & > div {
+      padding: 0 0.6rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 5.8rem;
+      color: #686f7a;
+
+      @media screen and (min-width: 740px) {
+        font-size: 1.6rem;
+        padding: 0 1.6rem;
+      }
+
+      &:first-child {
+        padding-left: 1.6rem;
+      }
+
+      &.active-tab {
+        border-bottom: 2px solid #3c3b37;
+        color: #000;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: #000;
+      }
+
+      &.content-tab {
+        @media screen and (min-width: 1024px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .H__placeholder {
+    .H__learning-tab__container {
+
+      @media screen and (min-width: 740px) {
+        width: 83.33333%;
+        margin: 0 auto;
+      }
+    }
+
+    .H__learning-playlist {
+      @media screen and (min-width: 740px) {
+        width: 83.33333%;
+        margin: 0 auto;
+      }
+
+      @media screen and (min-width: 1024px) {
+        width: 25%;
+        margin: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin-top: 5.2rem;
+      }
+    }
+  }
+}
+
+footer.H__main-footer {
+  text-align: center;
+  margin-top: 5rem;
+  padding: 1.2rem 1.6rem;
+
+  @media screen and (min-width: 1024px) {
+    width: 75%;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  div {
+    font-size: 1.4rem;
+    color: #888;
+
+    i {
+      margin: 0 0.2rem;
+      color: #d43c68;
+    }
+  }
+}
+
+///////////////////////////////Scroll zoom out video////////////////////
+.video_change {
+
+  .H__learning-video {
+    position: fixed;
+    top: 3.15rem;
+    z-index: 99999;
+    width: 75%;
+    height: 28%;
+
+    &__wrapper {
+      padding-top: 40%;
+    }
+  }
+
+  .H__learning-tabs {
+    position: fixed !important;
+    width: 75% !important;
+    top: 25rem !important;
+  }
+
+  .H__placeholder {
+    position: absolute;
+    top: 70rem;
+    width: 75%;
+
+    .H__learning-tab__container {
+      padding-left: 3rem;
+     }
+  }
+}

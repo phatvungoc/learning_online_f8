@@ -1,0 +1,144 @@
+<app-header></app-header>
+
+<section class="H__main">
+  <ng-container *ngIf="updateForm">
+    <h1>Cài đặt</h1>
+    <div class="groupField">
+      <h2>Thông tin cá nhân</h2>
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+        <div class="formGroup">
+          <label for="lastName">Họ và tên đệm (*)</label>
+          <input
+            type="text"
+            id="lastName"
+            class="H__input"
+            formControlName="lastName"
+            [ngClass]="lastName.invalid && lastName.touched ? 'invalid' : ''"
+          />
+          <div *ngIf="lastName.touched" class="error-messages">
+            <span *ngIf="lastName.hasError('pattern')"
+              >Họ và tên đệm không hợp lệ</span
+            >
+            <span *ngIf="lastName.hasError('required')"
+              >Họ và tên đệm không được trống</span
+            >
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label for="firstName">Tên (*)</label>
+          <input
+            type="text"
+            id="firstName"
+            class="H__input"
+            formControlName="firstName"
+            [ngClass]="firstName.invalid && firstName.touched ? 'invalid' : ''"
+          />
+          <div *ngIf="firstName.touched" class="error-messages">
+            <span *ngIf="firstName.hasError('pattern')">Tên không hợp lệ</span>
+            <span *ngIf="firstName.hasError('required')"
+              >Tên không được trống</span
+            >
+          </div>
+          <p class="H__hint">
+            Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận
+            của bạn.
+          </p>
+        </div>
+
+        <div class="formGroup">
+          <label for="phoneNumber">Số điện thoại (*)</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            class="H__input"
+            formControlName="phoneNumber"
+            [ngClass]="
+              phoneNumber.invalid && phoneNumber.touched ? 'invalid' : ''
+            "
+          />
+          <div *ngIf="phoneNumber.touched" class="error-messages">
+            <span
+              *ngIf="
+                phoneNumber.hasError('minlength') ||
+                phoneNumber.hasError('maxlength') ||
+                phoneNumber.hasError('pattern')
+              "
+              >Số điện thoại không hợp lệ</span
+            >
+            <span *ngIf="phoneNumber.hasError('required')"
+              >Số điện thoại không được trống</span
+            >
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label for="avatar">Ảnh đại diện</label>
+          <input
+            type="file"
+            id="avatar"
+            formControlName="avatar"
+            accept="image/*"
+            (change)="onChange($event)"
+          />
+          <img
+            *ngIf="image && validFile"
+            [src]="image"
+            alt="avatar"
+            class="H__avatar"
+          />
+          <div class="error-messages">
+            <span *ngIf="!validFile">Định dạng tệp không hợp lệ.</span>
+          </div>
+          <p class="H__hint">
+            Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.
+          </p>
+        </div>
+
+        <div class="formGroup">
+          <label for="bio">Bio</label>
+          <textarea id="bio" formControlName="bio"></textarea>
+          <p class="H__hint">
+            Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của
+            bạn.
+          </p>
+        </div>
+
+        <div class="formGroup">
+          <label for="password">
+            <span class="d-block">Xác thực đó là bạn</span>
+            <span class="d-block">Mật khẩu (*)</span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            class="H__input"
+            formControlName="password"
+          />
+        </div>
+
+        <div class="formGroup">
+          <button
+            type="submit"
+            class="H__button--submit"
+            [disabled]="updateForm.invalid"
+            [ngClass]="updateForm.invalid ? 'invalid' : ''"
+          >
+            Cập nhật
+          </button>
+        </div>
+
+        <div class="formGroup">
+          <p *ngIf="isSuccessful" class="H__success-announce">
+            Cập nhật thành công!
+          </p>
+          <p *ngIf="isSuccessful === false" class="H__fail-announce">
+            Có lỗi xảy ra. Vui lòng thử lại sau!
+          </p>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</section>
+
+<app-footer></app-footer>

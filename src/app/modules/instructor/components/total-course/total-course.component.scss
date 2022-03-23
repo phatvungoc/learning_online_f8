@@ -1,0 +1,65 @@
+.container {
+  padding-bottom: 50px;
+  font-size: 1.6rem;
+  .heading {
+    padding: 20px;
+    color: #f05123;
+    font-size: 2em;
+    text-align: center;
+  }
+  .title,
+  .manipulate {
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+  .course-img {
+    cursor: pointer;
+  }
+  .course-title {
+    cursor: pointer;
+    padding: 20px;
+    font-weight: 600;
+    font-size: 1.25em;
+  }
+  .course {
+    padding: 0.25em;
+    margin: 0.25em;
+    border-top: 1px solid #000;
+  }
+  .edit-btn {
+    i {
+      color: rgb(255, 153, 0);
+    }
+  }
+  .delete-btn {
+    i {
+      color: rgb(103, 0, 0);
+    }
+  }
+  .fade-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    .edit-modal {
+      h2 {
+        text-align: center;
+        font-size: 2em;
+        color: #f05123;
+        
+      }
+      width: 500px;
+      height: 600px;
+      position: fixed;
+      top: 100px;
+      left: 36%;
+      background-color: #fff;
+      padding: 40px;
+      box-shadow: 0px 0px 4px 4px #898989;
+      border-radius: 16px;
+    }
+  }
+}

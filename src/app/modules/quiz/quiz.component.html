@@ -1,0 +1,107 @@
+<div class="quiz_wrapper">
+  <div class="quiz_header">
+    <div class="quiz_header_backBlock" [routerLink]="['/learning/53a097b2-6070-4773-a879-ad80f73305f1']">
+      <i class="fas fa-chevron-left icon-backBlock"></i>
+    </div>
+    <div class="quiz_header_titleBlock" *ngIf="question">Quiz #: {{question.quizTitle}}</div>
+    <div class="quiz_header_progressBlock">
+      <div class="quiz_header_progressBlock_exerciseItem" [class.exerciseItem_active]="quizHashCode==q.hashCode"
+        *ngFor="let q of quizs; index as idx" (click)="handleChooseQuiz(q.hashCode)">
+        <ng-container *ngIf="userPassedQuiz.quizsPassedHashCode.includes(q.hashCode); else notPassed">
+          <i class="fas fa-check"></i>
+        </ng-container>
+        <ng-template #notPassed>
+          {{idx+1}}
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="quiz_container">
+    <div class="quiz_container_splitPane row">
+      <div class="quiz_container_splitPane_pane col-xl-5 col-lg-5 col-md-5 col-sm-12">
+        <div class="exercise-content-panel">
+          <div class="exercise-sidebar-tabs">
+            <div class="exercise-sidebar-btn sidebar-active">
+              <i class="fas fa-book-open icon-quiz"></i>
+            </div>
+            <div class="exercise-sidebar-btn">
+              <i class="fas fa-trophy icon-quiz"></i>
+            </div>
+            <div class="exercise-sidebar-btn">
+              <i class="fas fa-history icon-quiz"></i>
+            </div>
+            <div class="exercise-sidebar-btn">
+              <i class="fas fa-comment icon-quiz"></i>
+            </div>
+            <div class="exercise-sidebar-btn">
+              <i class="fas fa-question icon-quiz"></i>
+            </div>
+          </div>
+          <div class="exercise-textContent">
+            <div class="exercise-textContent-infoBlock">
+              <div class="exercise-textContent-avatarBlock">
+                <img class="exercise-textContent-avatar"
+                  src="https://lh3.googleusercontent.com/a-/AOh14GjZYb7BRB_PdGRMf6XZC-yrWB-gHse1uyawoD-BNw=s400" alt="">
+              </div>
+              <div class="exercise-textContent-levelBox textContent-quiz">
+                #Quiz
+              </div>
+              <div class="exercise-textContent-levelBox textContent-easy">
+                Đơn giản
+              </div>
+              <div class="exercise-textContent-for-win">
+                <div class="exercise-textContent-icon-wrap">
+                  <i class="fas fa-heart icon-for-win"></i>
+                </div>
+                <span>50</span>
+              </div>
+            </div>
+            <div class="exercise-textContent-videoToggle show-video" (click)="isVideoEnabled=true"
+              *ngIf="!isVideoEnabled; else noVideoEnabled">
+              <i class="fab fa-youtube icon-video"></i>
+              <span>Xem video</span>
+            </div>
+            <ng-template #noVideoEnabled>
+              <div class="exercise-textContent-videoToggle hide-video" (click)="isVideoEnabled=false">
+                <i class="fas fa-times icon-video"></i>
+                <span>Đóng video</span>
+              </div>
+            </ng-template>
+            <div class="exercise-textContent-video-on" *ngIf="isVideoEnabled">
+              <iframe width="540" height="300" src="https://www.youtube.com/embed/GE4jeED9B1s">
+              </iframe>
+            </div>
+            <div class="exercise-textContent-content">
+              <h3>Câu hỏi</h3>
+              <p *ngIf="question">{{question.content}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quiz_container_splitPane_panelPractice col-xl-7 col-lg-7 col-md-7 col-sm-12">
+        <div class="panelPractice">
+          <div class="panelPractice-quiz-wrapper" *ngIf="answers; else noAnswer">
+            <ng-container *ngFor="let answer of answers; index as idx">
+              <label class="panelPractice-quiz-item panelPractice-quiz-item-title" for="{{idx}}">
+                <input type="checkbox" class="radio-checkboxInput" id="{{idx}}" [checked]="funcCheck(answer)"
+                  value="{{idx}}" #answer>
+                {{answer.content}}
+              </label>
+            </ng-container>
+          </div>
+          <ng-template #noAnswer>
+            <p> No answer</p>
+          </ng-template>
+          <div class="panelPractice-quiz-footer">
+            <div class="panelPractice-quiz-submitBtn" (click)="handleSubmitAnswer(quizs)">
+              <div class="panelPractice-quiz-testCaseBtn">
+                <i class="fas fa-arrow-right icon-arrow-right"></i>
+                <span>Bài tiếp theo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

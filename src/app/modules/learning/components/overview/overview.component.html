@@ -1,0 +1,172 @@
+<div class="course-detail_des_dis">
+  <div class="course-detail-description">
+    Bạn muốn học lập trình hiệu quả hơn không? Hãy học tại trang web http://fullstack.edu.vn thay vì
+    Youtube. Lý do tại sao mời bạn bấm vào đây: ...
+  </div>
+  <div class="course-detail-discussion">
+    <div class="discussion_contentHeading">
+      <h4>6 hỏi đáp</h4>
+      <div class="discussion_shareBlock">
+        <span>CHIA SẺ</span>
+        <div class="discussion_shareBtnFb">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="discussion_shareBtnMail">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="discussion_shareBtnLink">
+          <i class="fas fa-link"></i>
+        </div>
+      </div>
+    </div>
+    <div class="discussion_commentBox">
+      <img class="discussion-myAvatar"
+        src="https://lh3.googleusercontent.com/a-/AOh14GgrzOeZvX9AGj7uLrSnDAkMPgFYSfnvH-v5XcHB=s400"
+        alt="{{userDetail.firstName}} {{userDetail.lastName}}">
+      <div class="discussion-input" contenteditable="true" role="textbox"
+        placeholder="Bạn có thắc mắc gì trong khóa học này?" aria-multiline="true" spellcheck="false"
+        (click)="isComments=true" (input)="handleComment($event)" #commentInput></div>
+      <ng-container *ngIf="isComments">
+        <div class="discussion-actionWrapper">
+          <button class="discussion-cancel" (click)="isComments=false">Hủy</button>
+          <button class="discussion-comment" [class.canComment]="isTyping" (click)="handleSubmitComment()">Bình
+            luận</button>
+        </div>
+      </ng-container>
+    </div>
+    <div class="discussion-allcomments">
+      <div class="discussion_detail" *ngFor="let comment of comments; index as idx">
+        <div class="discussion-avatarWrapper">
+          <img class="discussion-avatar"
+            src="https://lh3.googleusercontent.com/a-/AOh14GjPa0RAF0JjLQ6_ubhMi_R_zuHXCmQkFtIld7el=s400" alt="tín phan">
+        </div>
+        <div class="discussion_commentBody">
+          <div class="discussion_commentContent">
+            <h5>{{displayUserNameComment(comment.userHashCode)}}</h5>
+            <div class="discussion_commentContext">
+              <span>{{comment.content}}</span>
+            </div>
+            <ng-container *ngIf="comment.activeLike">
+              <div class="discussion_reactionsCount">
+                <div class="reaction-icon">
+                  <i class="fas fa-thumbs-up like-icon"></i>
+                </div>
+                <div class="discussion_reactionsNum">1</div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="discussion_commentTime">
+            <p class="discussion_createdAt">
+              <span class="discussion_iconWrapper">
+                <span class="discussion_likeComment" (click)="comment.activeLike = !comment.activeLike">Thích</span>
+                <span>.</span>
+              </span>
+              <span class="discussion_replyComment" (click)="handleOpenReplyBox(comment)">
+                Trả lời
+              </span>
+              <span>.</span>
+              <span class="discussion_time">2 tháng trước</span>
+            </p>
+          </div>
+          <div class="discussion_commentBox" *ngIf="comment.activeReply">
+            <img class="discussion-myAvatar"
+              src="https://lh3.googleusercontent.com/a-/AOh14GgrzOeZvX9AGj7uLrSnDAkMPgFYSfnvH-v5XcHB=s400" alt="">
+            <div class="discussion-input-reply" contenteditable="true" role="textbox"
+              placeholder="Bạn có thắc mắc gì trong khóa học này?" aria-multiline="true" spellcheck="false"
+              (input)="handleReplyComment($event, comment)"></div>
+            <div class="discussion-actionWrapper">
+              <button class="discussion-cancel" (click)="handleCancelReplyComment(comment)">Hủy</button>
+              <button class="discussion-comment" [class.canComment]="comment.isTypingReply">Bình luận</button>
+            </div>
+          </div>
+          <!-- <ng-container *ngIf="isHideReplies; else displayReplies">
+            <div class="discussion_viewRepliesMore">
+              <span (click)="isHideReplies=false">
+                <span class="discussion_showHideComment">Xem 2 câu trả lời</span>
+                <i class="fas fa-angle-down icon-angle-up"></i>
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #displayReplies>
+            <div class="discussion_viewRepliesMore">
+              <span (click)="isHideReplies=true">
+                <span class="discussion_showHideComment">Ẩn câu trả lời</span>
+                <i class="fas fa-angle-up icon-angle-up"></i>
+              </span>
+            </div>
+          </ng-template> -->
+        </div>
+      </div>
+      <!-- <div class="discussion_replyWrap" *ngIf="isHideReplies === false">
+        <div class="discussion_detailComment">
+          <div class="discussion-avatarWrapper">
+            <img class="discussion-avatar"
+              src="https://lh3.googleusercontent.com/a-/AOh14GhdsfLNF2bTFWSV9ZTbvwhXH8enhYzvYlYP7T21=s400"
+              alt="Duy Hoàng">
+          </div>
+          <div class="discussion_commentBody">
+            <div class="discussion_commentContent">
+              <h5>Duy Hoàng</h5>
+              <div class="discussion_commentContext">
+                <span>Sửa thành npx serve -s build thử xem</span>
+              </div>
+              <div class="discussion_reactionsCount">
+                <div class="reaction-icon">
+                  <i class="fas fa-thumbs-up like-icon"></i>
+                </div>
+                <div class="discussion_reactionsNum">1</div>
+              </div>
+            </div>
+            <div class="discussion_commentTime">
+              <p class="discussion_createdAt">
+                <span class="discussion_iconWrapper">
+                  <span class="discussion_likeComment">Thích</span>
+                  <span>.</span>
+                </span>
+                <span class="discussion_replyComment">
+                  Trả lời
+                </span>
+                <span>.</span>
+                <span class="discussion_time">2 tháng trước</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="discussion_detailComment">
+          <div class="discussion-avatarWrapper">
+            <img class="discussion-avatar"
+              src="https://lh3.googleusercontent.com/a-/AOh14GjXRESCkeS3iZsrsZVyDvweDG1T04Zm7pprgLEh=s400"
+              alt="Nguyễn Ngọc Ánh">
+          </div>
+          <div class="discussion_commentBody">
+            <div class="discussion_commentContent">
+              <h5>Nguyễn Ngọc Ánh</h5>
+              <div class="discussion_commentContext">
+                <span>&nbsp;Thank you ông nhiều &lt;3 </span>
+              </div>
+              <div class="discussion_reactionsCount">
+                <div class="reaction-icon">
+                  <i class="fas fa-thumbs-up like-icon"></i>
+                </div>
+                <div class="discussion_reactionsNum">1</div>
+              </div>
+            </div>
+            <div class="discussion_commentTime">
+              <p class="discussion_createdAt">
+                <span class="discussion_iconWrapper">
+                  <span class="discussion_likeComment">Thích</span>
+                  <span> . </span>
+                </span>
+                <span class="discussion_replyComment">
+                  Trả lời
+                </span>
+                <span> . </span>
+                <span class="discussion_time">2 tháng trước</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

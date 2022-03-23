@@ -1,0 +1,167 @@
+<div class="container">
+  <h2>Nội dung chi tiết</h2>
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item" *ngFor="let section of sectionList; let index = index">
+      <h2 class="accordion-header" id="headingOne">
+        <button 
+        class="accordion-button" type="button" data-bs-toggle="collapse" 
+        [attr.data-bs-target]="'#heading' + index" aria-expanded="true" aria-controls="collapseOne">
+          <div class="col-lg-11" >
+            <span class="section-title">{{ section.title }}</span>
+          </div>
+          <div class="col-lg-1">
+            <a class="edit-btn" (click)="editSection(section.title, section.description,section.hashCode)"><i class="fas fa-edit"></i></a>
+            <a class="delete-btn" (click)="deleteSection(section.hashCode)"><i class="fas fa-trash"></i></a>
+          </div>
+        </button>
+      </h2>
+      <div 
+      id="heading{{index}}" class="accordion-collapse collapse collapse" 
+      aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body" *ngFor="let lession of section.lessions">
+          <div class="row">
+            <div class="col-lg-11">
+              <span>{{ lession.title }}</span>
+            </div>
+            <div class="col-lg-1">
+              <a class="edit-btn" (click)="editLession(lession.title, lession.description, section.hashCode, lession.hashCode)"><i class="fas fa-edit"></i></a>
+              <a class="delete-btn" (click)="deleteLession(lession.hashCode,section.hashCode)"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <button class="add" (click)="addLession(section.hashCode)"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <button class="add" (click)="addSection()"><i class="fas fa-plus"></i></button>
+    </div>
+  </div>
+
+  <!-- edit section form -->
+  <div class="fade-background" *ngIf="isEditSectionOn">
+    <div class="edit-section-modal">
+      <a class="close-btn" (click)="turnOffSection()"><i class="fas fa-times"></i></a>
+      <h3>chỉnh sửa chương học</h3>
+      <form [formGroup]="sectionForm" (ngSubmit)="onSubmitSection()">
+        <div>
+          <p class=input-title>tiêu đề chương học*</p>
+          <input type="text" placeholder=""
+          formControlName="title">
+          <div class="error-message" *ngIf="sectionTitle.touched">
+            <p *ngIf="sectionTitle.hasError('required')">Tiêu đề không được bỏ trống</p>
+            <p *ngIf="sectionTitle.hasError('pattern')">Tiêu đề không hợp lệ</p>
+          </div>
+        </div>
+        <div>
+          <p class=input-title>mô tả chương học *</p>
+          <input type="text" placeholder=""
+          formControlName="description">
+          <div class="error-message" *ngIf="sectionDescription.touched">
+            <p *ngIf="sectionDescription.hasError('required')">mô tả không được bỏ trống</p>
+            <p *ngIf="sectionDescription.hasError('pattern')">mô tả không hợp lệ</p>
+          </div>
+        </div>
+  
+        <div>
+          <button type="submit" [disabled]="sectionForm.invalid">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- edit lession form -->
+  <div class="fade-background" *ngIf="isEditLessionOn">
+    <div class="edit-lession-modal">
+      <a class="close-btn" (click)="turnOffLession()"><i class="fas fa-times"></i></a>
+      <h3>chỉnh sửa bài học</h3>
+      <form [formGroup]="lessionForm" (ngSubmit)="onSubmitLession()">
+        <div>
+          <p class=input-title>tiêu đề bài học*</p>
+          <input type="text" placeholder=""
+          formControlName="title">
+          <div class="error-message" *ngIf="lessionTitle.touched">
+            <p *ngIf="lessionTitle.hasError('required')">Tiêu đề không được bỏ trống</p>
+            <p *ngIf="lessionTitle.hasError('pattern')">Tiêu đề không hợp lệ</p>
+          </div>
+        </div>
+        <div>
+          <p class=input-title>link video bài học *</p>
+          <input type="text" placeholder=""
+          formControlName="video">
+          <div class="error-message" *ngIf="lessionVideo.touched">
+            <p *ngIf="lessionVideo.hasError('required')">link video không được bỏ trống</p>
+            <p *ngIf="lessionVideo.hasError('pattern')">link video không hợp lệ</p>
+          </div>
+        </div>
+  
+        <div>
+          <button type="submit" [disabled]="lessionForm.invalid">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- add section form -->
+  <div class="fade-background" *ngIf="isAddSectionOn">
+    <div class="edit-section-modal">
+      <a class="close-btn" (click)="turnOffAddSection()"><i class="fas fa-times"></i></a>
+      <h3>thêm chương học</h3>
+      <form [formGroup]="addSectionForm" (ngSubmit)="onSubmitAddSection()">
+        <div>
+          <p class=input-title>tiêu đề chương học*</p>
+          <input type="text" placeholder=""
+          formControlName="title">
+          <div class="error-message" *ngIf="addSectionTitle.touched">
+            <p *ngIf="addSectionTitle.hasError('required')">Tiêu đề không được bỏ trống</p>
+            <p *ngIf="addSectionTitle.hasError('pattern')">Tiêu đề không hợp lệ</p>
+          </div>
+        </div>
+        <div>
+          <p class=input-title>mô tả chương học *</p>
+          <input type="text" placeholder=""
+          formControlName="description">
+          <div class="error-message" *ngIf="addSectionDescription.touched">
+            <p *ngIf="addSectionDescription.hasError('required')">mô tả không được bỏ trống</p>
+            <p *ngIf="addSectionDescription.hasError('pattern')">mô tả không hợp lệ</p>
+          </div>
+        </div>
+  
+        <div>
+          <button type="submit" [disabled]="addSectionForm.invalid">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- add lession form -->
+  <div class="fade-background" *ngIf="isAddLessionOn">
+    <div class="edit-lession-modal">
+      <h3>thêm bài học</h3>
+      <a class="close-btn" (click)="turnOffAddLession()"><i class="fas fa-times"></i></a>
+      <form [formGroup]="addLessionForm" (ngSubmit)="onSubmitAddLession()">
+        <div>
+          <p class=input-title>tiêu đề bài học*</p>
+          <input type="text" placeholder=""
+          formControlName="title">
+          <div class="error-message" *ngIf="addLessionTitle.touched">
+            <p *ngIf="addLessionTitle.hasError('required')">Tiêu đề không được bỏ trống</p>
+            <p *ngIf="addLessionTitle.hasError('pattern')">Tiêu đề không hợp lệ</p>
+          </div>
+        </div>
+        <div>
+          <p class=input-title>link video bài học *</p>
+          <input type="text" placeholder=""
+          formControlName="video">
+          <div class="error-message" *ngIf="addLessionVideo.touched">
+            <p *ngIf="addLessionVideo.hasError('required')">link video không được bỏ trống</p>
+            <p *ngIf="addLessionVideo.hasError('pattern')">link video không hợp lệ</p>
+          </div>
+        </div>
+        
+  
+        <div>
+          <button type="submit" [disabled]="addLessionForm.invalid">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

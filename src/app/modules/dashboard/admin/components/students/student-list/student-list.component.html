@@ -1,0 +1,93 @@
+<div class="H__title">
+  <h2>Danh Sách Học Viên ({{ totalStudents }})</h2>
+</div>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <input formControlName="name" type="text" placeholder="Họ tên" />
+  <select formControlName="status">
+    <option value="0" selected>Active</option>
+    <option value="1">Inactive</option>
+  </select>
+  <button type="submit">Tìm</button>
+  <button type="button" class="get-all-btn" (click)="onGetStudentList()">
+    Tất cả
+  </button>
+</form>
+
+<div class="H__pagination H__pagination--top">
+  <pagination-controls
+    id="student-list"
+    (pageChange)="currentPage = $event"
+    [maxSize]="9"
+    [directionLinks]="true"
+    previousLabel="Trước"
+    nextLabel="Sau"
+  >
+  </pagination-controls>
+</div>
+<div class="H__body">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Họ tên</th>
+        <th scope="col">Email</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Đăng nhập gần nhất</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let student of displayList
+            | paginate
+              : {
+                  id: 'student-list',
+                  itemsPerPage: pageSize,
+                  currentPage: currentPage,
+                  totalItems: totalStudents
+                }
+        "
+      >
+        <td class="H__text-left">
+          {{ student.lastName + " " + student.firstName }}
+        </td>
+        <td class="H__text-left">
+          {{ student.email }}
+        </td>
+
+        <td [ngSwitch]="student.status">
+          <ng-container *ngSwitchCase="0">
+            <i class="fas fa-circle active"></i><span>Active</span>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="1">
+            <i class="fas fa-circle pending"></i><span>Inactive</span>
+          </ng-container>
+        </td>
+        <td>
+          {{ student.loginAt | date: "dd/MM/yy, h:mm a" }}
+        </td>
+        <td>
+          <button
+            class="btn btn-primary"
+            (click)="onGetStudentHashCode(student.hashCode)"
+          >
+            Chi tiết
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="H__pagination">
+  <pagination-controls
+    id="student-list"
+    (pageChange)="currentPage = $event"
+    [maxSize]="9"
+    [directionLinks]="true"
+    previousLabel="Trước"
+    nextLabel="Sau"
+  >
+  </pagination-controls>
+</div>

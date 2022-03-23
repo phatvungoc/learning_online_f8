@@ -1,0 +1,48 @@
+<div class="container">
+  <h2 class="heading"><i class="fas fa-edit"></i> Quản lý khóa học</h2>
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-12">
+      <mat-card *ngIf="coursesList?.length > 0">
+        <div class="row">
+          <div class="col-10 title">
+            Thông tin khóa học
+          </div>
+          <div class="col-2 manipulate">
+            Thay đổi
+          </div>
+        </div>
+        <mat-list>
+          <div *ngFor="let course of coursesList;let i = index" class="course">
+              <div class="row">
+                <div class="col-2">
+                  <img src="https://localhost:5001/Thumbnail/{{course.image}}" 
+                  alt="" width="120px" height="80px" class="course-img"
+                  (click)="updateCourseDetail(course.hashCode)">
+                </div>
+                <div class="col-8">
+                  <span class="course-title" (click)="updateCourseDetail(course.hashCode)">{{course.title}} </span>
+                </div>
+                <div class="col-2">
+                  <button mat-icon-button (click)="editCourse(course.hashCode, i)" class="edit-btn">
+                      <i class="fas fa-edit"></i>
+                  </button>
+                  <button mat-icon-button (click)="removeCourse(course.hashCode)" class="delete-btn">
+                      <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </mat-list>
+      </mat-card>
+    </div>
+  </div>
+  <div class="fade-background" *ngIf="toggleModal">
+    <div class="edit-modal">
+      <h2>Chỉnh sửa khóa học</h2>
+      <app-update-form 
+      [courseHashCode]="courseHashCode" [index]="index" 
+      (onClose)="toggleModal=$event" (onUpdate)="getUpdatedData($event)">
+    </app-update-form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+.H__main {
+  margin-top: 6.6rem;
+  position: relative;
+}
+
+.sidebar-container {
+  position: fixed;
+  top: 7.4rem;
+  left: 0;
+}
+
+.H__admin-dashboard {
+  min-height: 1000px;
+  width: 95%;
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+
+  @media screen and (min-width: 992px) {
+    width: 80%;
+  }
+}
+
+.H__field {
+  padding: 3rem 2.5rem;
+  box-shadow: 0px 0px 0.6px rgba(0, 0, 0, 0.07),
+    0px 0px 1.3px rgba(0, 0, 0, 0.101), 0px 0px 2.5px rgba(0, 0, 0, 0.125),
+    0px 0px 4.5px rgba(0, 0, 0, 0.149), 0px 0px 8.4px rgba(0, 0, 0, 0.18),
+    0px 0px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0.6rem;
+  }
+
+  &--1::before {
+    // background: #ff4150;
+    background: #dc3545;
+  }
+  &--2::before {
+    // background: #f7d756;
+    background: #ffc107;
+  }
+  &--3::before {
+    // background: #31bb63;
+    background: #198754;
+  }
+  &--4::before {
+    // background: #0cb5e2;
+    background: #0d6efd;
+  }
+
+  &__index {
+    h3 {
+      font-size: 4rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #727272;
+      margin-top: -1rem;
+      margin-bottom: 0;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10%;
+    right: 8%;
+    i {
+      font-size: 5rem;
+      color: #727272;
+
+      @media screen and (min-width: 992px) and (max-width: 1199px) {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  &.active {
+    h3,
+    p,
+    i {
+      color: #fff;
+    }
+  }
+
+  &--1.active {
+    background: #dc3545;
+  }
+  &--2.active {
+    background: #ffc107;
+  }
+  &--3.active {
+    background: #198754;
+  }
+  &--4.active {
+    background: #0d6efd;
+  }
+}

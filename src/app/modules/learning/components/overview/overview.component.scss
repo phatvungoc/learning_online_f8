@@ -1,0 +1,287 @@
+$colorGray: #666;
+$colorBlack: #000;
+$colorWhite: #fff;
+$colorText: #333;
+$colorFb: #4080ff;
+$colorMail: #f47425;
+$colorPrimary: #f05123;
+$colorPrimaryBlue: #007791;
+$fontFamily: "Montserrat", Arial, Helvetica, sans-serif;
+
+a {
+  color: $colorBlack;
+}
+
+.course-detail {
+
+  &-description {
+    margin-top: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $colorText;
+    margin-top: 24px;
+  }
+  &-discussion {
+    position: relative;
+    min-height: 100px;
+    width: 100%;
+    margin-top: 50px;
+    %button {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+
+    %shareBtn {
+      color: $colorWhite;
+      font-size: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 12px;
+      cursor: pointer;
+    }
+    %commentAction-btn {
+      padding: 8px 16px;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+      border-radius: 20px;
+      transition: all 0.2s ease-in-out;
+      background: transparent;
+    }
+    %avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      position: absolute;
+      left: -32px;
+      top: -4px;
+      text-align: center;
+    }
+
+    .discussion {
+      &_contentHeading {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 48px;
+
+        h4 {
+          font-size: 20px;
+          font-weight: 600;
+          margin: 0 auto 0 0;
+        }
+      }
+      &_shareBlock {
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 16px;
+        }
+      }
+
+      &_shareBtnFb {
+        @extend %shareBtn;
+        background-color: $colorFb;
+      }
+      &_shareBtnMail {
+        @extend %shareBtn;
+        font-size: 14px;
+        background-color: $colorMail;
+      }
+      &_shareBtnLink {
+        @extend %shareBtn;
+        font-size: 14px;
+        background-color: $colorGray;
+      }
+      &_commentBox {
+        position: relative;
+        margin: 0 0 8px 32px;
+        padding-bottom: 48px;
+        line-height: 1.6;
+        max-width: 600px;
+      }
+      &-myAvatar {
+        @extend %avatar;
+      }
+      &-input,
+      &-input-reply {
+        border: none;
+        outline: none;
+        margin: 0 0 0 16px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 4px;
+        padding-left: 0;
+        white-space: pre-wrap;
+        font-size: 16px;
+        color: #999;
+        width: 100%;
+        &[placeholder]:empty::before {
+          content: attr(placeholder);
+          color: #999;
+          cursor: text;
+          width: 100%;
+          display: inline-block;
+        }
+      }
+      &-actionWrapper {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+      &-cancel {
+        @extend %button;
+        @extend %commentAction-btn;
+        margin-right: 16px;
+
+        &:hover {
+          cursor: pointer;
+          color: #777;
+          background: #ebebeb;
+          opacity: 0.8;
+        }
+      }
+      &-comment {
+        @extend %button;
+        @extend %commentAction-btn;
+        background: #ccc;
+        color: $colorWhite;
+        pointer-events: none;
+        &.canComment {
+          background: $colorPrimary;
+          color: $colorWhite;
+          pointer-events: auto;
+          cursor: pointer;
+        }
+      }
+      &_detail {
+        display: flex;
+        margin-top: 16px;
+        position: relative;
+      }
+      &-avatarWrapper {
+        position: relative;
+        margin-left: 32px;
+      }
+      &-avatar {
+        @extend %avatar;
+      }
+      &_commentBody {
+        position: relative;
+        padding-left: 4px;
+        margin-left: 8px;
+        flex: 1 1;
+      }
+      &_commentContent {
+        min-width: 120px;
+        background-color: #f2f3f5;
+        border-radius: 18px;
+        color: #1c1e21;
+        display: inline-block;
+        max-width: 586px;
+        position: relative;
+        padding: 9px 12px;
+        h5 {
+          font-size: 14px;
+        }
+      }
+      &_commentContext {
+        font-size: 16px;
+        font-weight: 600;
+        span {
+          font-weight: 400;
+          font-size: 16px;
+        }
+      }
+      &_reactionsCount {
+        position: absolute;
+        right: 0;
+        bottom: -12px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+        background-color: #fff;
+        padding: 2px 4px 2px 2px;
+        border-radius: 10px;
+        .reaction-icon {
+          background-color: $colorFb;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          box-shadow: rgb(250 250 250) 0px 0px 0px 2px;
+          position: relative;
+          z-index: 1;
+        }
+        .like-icon {
+          color: $colorWhite;
+          font-size: 11px;
+        }
+      }
+      &_reactionsNum {
+        font-size: 14px;
+        font-weight: 500;
+        margin-left: 3px;
+        color: #65676b;
+      }
+      &_commentTime {
+        margin-top: 8px;
+      }
+      &_createdAt {
+        font-size: 14px;
+        color: #999;
+      }
+      &_iconWrapper {
+        width: 40px;
+        text-align: center;
+      }
+      &_likeComment {
+        font-size: 14px;
+        color: #e87a5a;
+        margin: 0 4px;
+      }
+      &_replyComment {
+        font-size: 16px;
+        color: #e87a5a;
+        margin: 0 4px;
+        cursor: pointer;
+      }
+      &_time {
+        margin-left: 4px;
+      }
+      &_viewRepliesMore {
+        margin-left: 1px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        .icon-angle-up {
+          margin-left: 8px;
+          font-size: 16px;
+        }
+      }
+      &_showHideComment {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.6;
+        margin-top: 4px;
+        color: $colorText;
+      }
+      &_replyWrap {
+        width: calc(100% - 160px);
+        margin: 0 0 0 55px;
+        padding: 10px 0 0 16px;
+        border-left: 1px solid $colorPrimary;
+      }
+      &_detailComment {
+        position: relative;
+        display: flex;
+      }
+    }
+  }
+}

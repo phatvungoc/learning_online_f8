@@ -1,0 +1,138 @@
+@import "./varibales";
+
+.btn-arrow {
+  position: absolute;
+  z-index: 1;
+  height: 32px;
+  width: 32px;
+  top: 50%;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+  cursor: pointer;
+  line-height: 32px;
+  font-weight: 700;
+  text-align: center;
+
+  i {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 32px;
+    color: #4b4b4b;
+  }
+
+  &.btn-arrow-left {
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &.btn-arrow-right {
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &:hover {
+    i {
+      color: black;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.8em;
+  height: 0.8em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999999;
+  border-radius: 100vh;
+}
+
+@mixin content-row-container {
+  position: relative;
+  display: flex;
+  min-height: 200px;
+  padding-bottom: 16px;
+  overflow-x: auto;
+  transition: all 0.3s linear;
+
+  // CUSTOM SCROLLBAR
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    border-radius: 100vh;
+    opacity: 1;
+    visibility: visible;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+@mixin main {
+  margin-top: 66px;
+  display: flex;
+  min-height: 100vh;
+}
+
+@mixin main-wrapper {
+  // width: calc(100% - 96px);
+  flex: 1 1;
+  padding: 0 40px 0 20px;
+  min-height: 100vh;
+}
+
+@mixin main-container {
+  margin-top: 24px;
+  padding: 0 44px 68px;
+  min-height: 50vh;
+}
+
+@mixin media-mb-tb- {
+  .main {
+    .main-wrapper {
+      width: calc(100%);
+    }
+  }
+}
+
+// MIXIN FOR MEDIA TABLET
+@mixin media-tablet {
+  .main {
+    .main-wrapper {
+      padding-left: 32px;
+      padding-right: 32px;
+
+      .main-container {
+        padding: 0 0 60px;
+      }
+    }
+  }
+}
+
+// mobile
+@mixin media-mobile {
+  .main {
+    .home-page-wrapper {
+      padding-left: 16px;
+      padding-right: 16px;
+
+      .content-container {
+        padding: 0 0 36px;
+      }
+    }
+  }
+}

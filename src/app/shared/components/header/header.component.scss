@@ -1,0 +1,234 @@
+.header {
+  background-color: red;
+  position: fixed;
+  top: 0;
+  box-shadow: #bebebe 0px 3px 6px 0px;
+  z-index: 9;
+  background: #ffffff;
+  width: 100vw;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  &__title {
+    display: inline-block;
+    font-weight: 600;
+    margin-left: 16px;
+    font-size: 16px;
+    font-weight: 600px;
+  }
+  &__hamburger-btn {
+    cursor: pointer;
+    display: none;
+    width: 40px;
+    height: 40px;
+    color: #666666;
+    font-size: 26px;
+  }
+  &__alt-sidebar {
+    ul {
+      padding-top: 50px;
+      list-style: none;
+      position: absolute;
+      // visibility: hidden;
+      top: 0;
+      left: -360px;
+      background-color: #ffffff;
+      width: 360px;
+      height: 100vh;
+      z-index: 9;
+      transition: 0.3s;
+      box-shadow: #ffffff 0px 3px 6px 0px;
+      li {
+        padding: 15px 20px;
+        margin: 5px;
+        border-radius: 8px;
+
+        a {
+          text-decoration: none;
+          color: #757575;
+        }
+        &:active {
+          background-color: #ececec;
+        }
+      }
+    }
+  }
+  &__search {
+    position: relative;
+    i {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      font-size: 16px;
+      color: #a8b2b8;
+    }
+    input {
+      font-size: 16px;
+      outline: none;
+      padding: 0 30px 0 40px;
+      border: 1px solid #f0f0f0;
+      height: 40px;
+      border-radius: 32px;
+      width: 420px;
+
+      &:focus {
+        border: 1px solid #f05123;
+      }
+    }
+
+  }
+
+  &__login {
+    min-width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    &__alt-search,
+    &__cart {
+      cursor: pointer;
+      font-size: 20px;
+      color: #666666;
+      margin: 0 10px;
+      padding: 5px 7px;
+      display: inline-block;
+      &:hover {
+        color: #f05123;
+      }
+    }
+    &__alt-search {
+      position: relative;
+      top: -3px;
+      left: 20px;
+      display: none;
+      font-size: 22px;
+    }
+
+    &__btn {
+      text-decoration: none !important;
+      display: block;
+      font-size: 16px;
+      font-weight: 600px;
+      min-width: 120px;
+      cursor: pointer;
+      text-align: center;
+      background-color: #f05123;
+      line-height: 16px;
+      padding: 10px 12px;
+      border-radius: 4px;
+      color: #ffffff !important;
+      margin-right: 2em;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+    &__user {
+      margin-right: 2em;
+      left: 100px;
+      cursor: pointer;
+      &__avatar {
+        display: block;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+      }
+    }
+    &__info {
+      position: absolute;
+      top: 60px;
+      background-color: #ffffff;
+      box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+      font-size: 1.6em;
+      &__greeting {
+        border-bottom: 1px solid #cdcdcd;
+        margin: 0;
+        padding: 10px;
+        font-weight: 700;
+      }
+      &__logout {
+        cursor: pointer;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        color: #000;
+      }
+      .clickable-item {
+        cursor: pointer;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        color: #000;
+        border-bottom: 1px solid #cdcdcd;
+      }
+    }
+  }
+}
+
+// mobile, tablet
+@media screen and (max-width: 991px) {
+  .header {
+    &__title,
+    &__logo {
+      display: none;
+    }
+    &__hamburger-btn {
+      display: block;
+    }
+    &__search {
+      display: none;
+    }
+    .alt-search-container {
+      display: block;
+      position: fixed;
+      background-color: #ffffff;
+      width: 100vw;
+      height: 100vh;
+      top: 65px;
+      left: 0;
+      i {
+        left: 30px;
+        top: 23px;
+      }
+      .header__search__input {
+        width: 90% !important;
+        margin: 10px 20px;
+        display: block;
+      }
+    }
+    .alt-sidebar-container {
+      position: absolute;
+      top: 60px;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .alt-sidebar {
+      font-size: 1.8rem;
+      visibility: inherit;
+      transform: translateX(340px);
+    }
+  }
+}
+
+// tablet
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .header {
+    &__login {
+      &__alt-search {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+// mobile
+@media screen and (max-width: 767px) {
+  .header {
+    &__login {
+      &__alt-search {
+        display: inline-block;
+      }
+    }
+  }
+}

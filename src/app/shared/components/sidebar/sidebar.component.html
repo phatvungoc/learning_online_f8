@@ -1,0 +1,38 @@
+<!-- SIDEBAR -->
+<div class="sidebar-wrapper d-none d-lg-block">
+  <div class="sidebar-container">
+    <div class="sidebar-create-btn">
+      <strong><i class="fas fa-plus"></i></strong>
+    </div>
+    <ul class="sidebar-list">
+      <li>
+        <a
+          [routerLink]="['/']"
+          routerLinkActive="sidebar-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLinkActive="sidebar-active">
+          <i class="fas fa-hiking"></i>
+          <span>Lộ trình</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/courses']" routerLinkActive="sidebar-active">
+          <i class="fas fa-lightbulb"></i>
+          <span>Học</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <i class="fas fa-newspaper"></i>
+          <span>Blog</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

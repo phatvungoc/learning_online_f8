@@ -1,0 +1,164 @@
+<app-header (keydown)="searchByEnter($event)"></app-header>
+<div class="search">
+    <div class="container">
+      <div class="row">
+        <div class="search__information">
+          <h2 class="title">{{ resultsList?.length }} kết quả cho "{{ nameCourse | uppercase }}"</h2>
+          <h3 class="related-courses">Nhiều học viên đang theo học: <a href=""> CSS</a>,<a href=""> ReactJs</a>,<a href=""> Angular</a></h3>
+          <h3 class="garantee"><i class="fas fa-info-circle"></i> Không chắc chắn, đừng lo các khóa học đề có thể hoàn tiền trong 30 ngày.</h3>
+        </div>
+        <div class="search__sortNfilter">
+          <button class="search__sortNfilter__filter" appToggleSidebar>
+            <i class="fas fa-sort-amount-down"></i>
+            Lọc
+          </button>
+          <span class="search__sortNfilter__sort-by">sắp xếp <i class="fas fa-chevron-down"></i></span>
+          <select class="search__sortNfilter__sort">
+            <option selected value="">gần nhất</option>
+            <option value="">xem nhiều nhất</option>
+            <option value="">đánh giá cao</option>
+            <option value="">mới nhất</option>
+          </select>
+          <span class="search__sortNfilter__result-count">{{ courseList?.length }} Results</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 d-lg-block">
+          <div class="search__sidebar">
+            <div class="filter-list-cover">
+              <button class="search__sidebar__toggle-sidebar" appToggleSidebar><i class="fas fa-times"></i></button>
+              <ul class="search__sidebar__filter">
+                <li class="search__sidebar__filter__section">
+                  <div class="title" appToggleFilter>
+                    <span class="caret">Giá </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <ul class="nested">
+                    <li><input type="radio" name="price" value="" checked="checked" [(ngModel)]="price" (change)="filter()">Tất cả</li>
+                    <li><input type="radio" name="price" value="0" [(ngModel)]="price" (change)="filter()">Miễn Phí</li>
+                    <li><input type="radio" name="price" value="19" [(ngModel)]="price" (change)="filter()">$19</li>
+                    <li><input type="radio" name="price" value="99" [(ngModel)]="price" (change)="filter()">$99</li>
+                    <li><input type="radio" name="price" value="199" [(ngModel)]="price" (change)="filter()">$199</li>
+                  </ul>
+                </li>
+                <li class="search__sidebar__filter__section">
+                  <div class="title" appToggleFilter>
+                    <span class="caret">Chủ đề</span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <ul class="nested">
+                    <li><input type="radio" name="category" value="" checked="checked" [(ngModel)]="category" (change)="filter()">Tất cả</li>
+                    <li *ngFor="let item of categoryList">
+                      <input type="radio" name="category" value="{{item.hashCode}}" [(ngModel)]="category" (change)="filter()">
+                      {{ item.title }}
+                    </li>
+                  </ul>
+                </li>
+                <li class="search__sidebar__filter__section">
+                  <div class="title" appToggleFilter>
+                    <span class="caret">Trình độ</span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <ul class="nested">
+                    <li><input type="radio" name="level" value="" checked="checked" [(ngModel)]="level" (change)="filter()">Tất cả</li>
+                    <li><input type="radio" name="level" value="0" [(ngModel)]="level" (change)="filter()">Người mới</li>
+                    <li><input type="radio" name="level" value="1" [(ngModel)]="level" (change)="filter()">Trung cấp</li>
+                    <li><input type="radio" name="level" value="2" [(ngModel)]="level" (change)="filter()">Cao cấp</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-9" >
+          <div class="search__results">
+            <div class="empty-container" *ngIf="empty">
+              <h3>Không có kết quả cho từ khóa "{{ nameCourse }}"</h3>
+            </div>
+        
+            <div *ngIf="!empty">
+              <div class="search__results__item" *ngFor="let course of courseList">
+                <div class="row">
+                  <div class="col-md-4 col-sm-5 col-3">
+                    <div class="search__results__item__img">
+                      <a routerLink="/courses/{{course.hashCode}}"><img src="https://localhost:5001/Thumbnail/{{course.image}}" alt="" width="100%"></a>
+                    </div>
+                  </div>
+                  <div class="col-md-8 col-sm-7 col-9">
+                    <div class="search__results__item__information">
+                      <div class="title">
+                        {{ course.title }}
+                      </div> 
+                      <p class="instructor-list">
+                        Nguyen Hoang Linh  
+                      </p>
+                      <div class="rating">
+                        <span class="rating__score">4.7</span>
+                        <span class="rating__stars">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star-half-alt"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <!-- <span class="price">$99.99</span> -->
+                  </div>
+                </div>
+                <div class="tooltip">
+                  <h3 class="tooltip__title">Kiến Thức được học:</h3>
+                  <p *ngFor="let description of course.descriptionDetails">
+                    <i class="fa fa-check"></i> {{ description.content }}
+                  </p>
+                  
+                </div>
+              </div>
+            </div>
+            <!-- advertise relevant courses -->
+            <div class="search__results__advertise">
+              <h2>Các khóa học được đánh giá cao</h2>
+              <div class="scroll-btns">
+                <button class="scroll-btn scroll-left" appScrollRtl><i class="fas fa-chevron-left"></i></button>
+                <button class="scroll-btn scroll-right" appScrollLtr><i class="fas fa-chevron-right"></i></button>
+              </div>
+              <div class="row">
+                <div class="col-6 col-sm-6 col-lg-4 col-xl-3 item" *ngFor="let course of outstandingCoursesList">
+                  <div class="search__results__advertise__item">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="search__results__advertise__item__img">
+                          <a routerLink=""><img src="https://localhost:5001/Thumbnail/{{course.image}}" alt="" width="100%"></a>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="search__results__advertise__item__information">
+                          <div class="title">
+                            {{course.title}}
+                          </div>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item" (click)="goPrevious()">
+                  <a class="page-link" >Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let item of renderedList" (click)="choosePage(item.page-1)"><a [appHighlightPage]="currentPage" class="page-link ">{{item.page}}</a></li>
+                <li class="page-item" (click)="goNext()">
+                  <a class="page-link">Next</a>
+                </li>
+              </ul>
+            </nav>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<app-footer></app-footer>

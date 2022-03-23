@@ -1,0 +1,57 @@
+
+<a class="close-btn" (click)="turnOff()"><i class="fas fa-times"></i></a>
+<form [formGroup]="updateCourse" (ngSubmit)="onSubmit()" *ngIf="isData">
+  <div>
+    <p class=input-title>tiêu đề khóa học *</p>
+    <input type="text" placeholder="tiêu đề khóa học"
+    formControlName="title">
+    <div class="error-message" *ngIf="title.touched">
+      <p *ngIf="title.hasError('required')">Tiêu đề không được bỏ trống</p>
+      <p *ngIf="title.hasError('pattern')">Tiêu đề không hợp lệ</p>
+      <p *ngIf="title.hasError('maxlength')">Tiêu đề quá dài</p>
+
+    </div>
+  </div>
+  <div>
+    <p class=input-title>mô tả khóa học *</p>
+    <input type="text" placeholder="mô tả khóa học"
+    formControlName="description">
+    <div class="error-message" *ngIf="description.touched">
+      <p *ngIf="description.hasError('required')">mô tả không được bỏ trống</p>
+      <p *ngIf="description.hasError('pattern')">mô tả không hợp lệ</p>
+      <p *ngIf="description.hasError('maxlength')">mô tả quá dài</p>
+    </div>
+  </div>
+  <div>
+    <p class=input-title>hình ảnh khóa học *</p>
+    <input type="file" formControlName="image" (change)="onFileSelected($event)" accept=".jpg, .png" value="C:\fakepath\">
+  </div>
+  <div>
+    <p class=input-title>cấp độ *</p>
+    <select formControlName="level">
+      <option value="0" selected>Beginner</option>
+      <option value="1">Intermediate</option>
+      <option value="2">Expert</option>
+    </select>
+  </div>
+  <div>
+    <p class=input-title>Giá tiền </p>
+    <input type="number" value="0" formControlName="price">
+    <div class="error-message" *ngIf="price.touched">
+      <p *ngIf="price.hasError('required')">giá tiền không được bỏ trống</p>
+      <p *ngIf="price.hasError('pattern')">Giá tiền không hợp lệ</p>
+    </div>
+  </div>
+  <div>
+    <p class=input-title>chủ đề *</p>
+    <select formControlName="category">
+      <option value="123456">Angular</option>
+      <option value="299047f8-d833-4bfb-abf2-5341493e6afa">HTML, CSS</option>
+      <option value="52686557-8323-4b83-8615-314ced554fc8">React</option>
+      <option value="9219e92f-374a-420a-a2fa-b8cf6e0752b1">JavaScript</option>
+    </select>
+  </div>
+  <div>
+    <button type="submit">Update</button>
+  </div>
+</form>

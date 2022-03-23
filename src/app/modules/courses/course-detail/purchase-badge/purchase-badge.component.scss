@@ -1,0 +1,161 @@
+@import "../../../../shared/scss/varibales";
+
+.purchase-badge-wrapper {
+  margin-left: 12px;
+  margin-right: 12px;
+
+  .purchase-badge-container {
+    top: 82px;
+    // height: 460px;
+    background: #fff;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .course-preview {
+      position: relative;
+      width: calc(100% - 2px);
+      margin: 2px 0 20px;
+      overflow: hidden;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background: linear-gradient(to top, rgb(118, 18, 255), rgb(5, 178, 255));
+      z-index: 1;
+      cursor: pointer;
+
+      .course-preview-image {
+        padding-top: 60%;
+        background-size: cover;
+        background-position: center;
+      }
+
+      i {
+        position: absolute;
+        font-size: 6rem;
+        color: #fff;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      p {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #fff;
+        z-index: 1;
+        width: 100%;
+      }
+    }
+
+    h5 {
+      font-size: 32px;
+      font-weight: 400;
+      color: $primary-color;
+      margin: 0px auto;
+      opacity: 0.8;
+    }
+
+    button {
+      color: #fff;
+      background-color: $primary-color;
+      min-width: 150px;
+      padding: 0px 16px;
+      line-height: 40px;
+      font-size: 1.6rem;
+      letter-spacing: 1.5px;
+      border-radius: 10px;
+      margin: 20px 0px 8px;
+      display: inline-block;
+      transition: all 0.3s ease-in-out 0s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    ul {
+      list-style: none;
+      text-align: left;
+      padding: 24px 0px 10px 4px;
+      margin: 0px;
+
+      li {
+        line-height: 1.6;
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        position: relative;
+        padding-left: 35px;
+        color: rgb(73, 73, 73);
+
+        i {
+          position: absolute;
+          top: 4px;
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+:host-context(.detail-page-container) .purchase-badge-wrapper {
+  position: relative;
+  height: 100%;
+  .purchase-badge-container {
+    position: sticky;
+    margin-left: 24px;
+    margin-bottom: 60px;
+  }
+}
+
+:host-context(.course-wrapper) .purchase-badge-wrapper {
+  position: static;
+  height: auto;
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 0;
+  border: 1px solid rgb(235, 235, 235);
+
+  .purchase-badge-container {
+    position: static;
+    margin: 0;
+    padding: 0;
+
+    h5 {
+      padding-top: 20px;
+    }
+
+    ul {
+      padding: 24px 0 10px 4px;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .button-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding: 8px 16px;
+    z-index: 9;
+
+    button {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #fff;
+      background-color: $primary-color;
+      width: 100%;
+      padding: 8px 0;
+      border-radius: 5px;
+    }
+  }
+}

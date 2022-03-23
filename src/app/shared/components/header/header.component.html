@@ -1,0 +1,97 @@
+<!-- HEADER -->
+<header class="header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <a href="#" class="header__logo"
+            ><img
+              src="https://fullstack.edu.vn/assets/icon/f8_icon.png"
+              alt="f8-logo"
+              width="36px"
+              height="36px"
+          /></a>
+          <h4 class="header__title">Học lập trình để đi làm</h4>
+        </div>
+        <a class="header__hamburger-btn" appToggleAltSidebar
+          ><i class="fas fa-bars"></i
+        ></a>
+        <div class="header__alt-sidebar">
+          <ul>
+            <li>
+              <a href=""><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+            </li>
+            <li>
+              <a href=""><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a href=""><i class="fas fa-hiking"></i> Lộ trình</a>
+            </li>
+            <li>
+              <a href=""><i class="fas fa-lightbulb"></i> Học</a>
+            </li>
+            <li>
+              <a href=""><i class="fas fa-newspaper"></i> Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="header__search">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            class="header__search__input"
+            placeholder="Tìm kiếm khóa học, bài biết, video, ..."
+            [(ngModel)]="inputValue"
+            (keydown)="sendSearchValue($event)"
+          />
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="header__login">
+          <a class="header__login__alt-search" appToggleSearchInput
+            ><i class="fas fa-search"></i
+          ></a>
+          <a class="header__login__cart"
+            ><i class="fas fa-shopping-cart"></i
+          ></a>
+          <a
+            class="header__login__btn"
+            (click)="moveToLogin()"
+            *ngIf="!isLoggedIn"
+            >Đăng Nhập</a
+          >
+          <div class="header__login__user" *ngIf="isLoggedIn">
+            <a (click)="toggle()" class="header__login__user__avatar"
+              ><img src="{{ avatarLink }}" alt="" width="40px" height="40px"
+            /></a>
+          </div>
+          <div class="header__login__info" *ngIf="isDisplayed">
+            <p class="header__login__info__greeting">
+              Xin chào, {{ username }}
+            </p>
+            <a class="clickable-item" routerLink="/user/settings">Cài đặt</a>
+            <a
+              *ngIf="role === 'Admin'"
+              class="clickable-item"
+              routerLink="/dashboard/admin"
+              >Dashboard</a
+            >
+            <a
+              *ngIf="role === 'Instructor'"
+              class="clickable-item"
+              (click)="moveToInstructorDashboard()"
+              >Quản lý khóa học</a
+            >
+            <a
+              class="header__login__info__logout clickable-item"
+              routerLink="/user/login"
+              >Đăng xuất</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

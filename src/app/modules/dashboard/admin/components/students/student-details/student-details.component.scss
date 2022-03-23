@@ -1,0 +1,57 @@
+@import "../../../shared/scss/common";
+
+.H__body {
+  position: relative;
+
+  button.btn-show-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    @media screen and (max-width: 450px) {
+      padding-top: 4rem;
+    }
+  }
+
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 4rem;
+    row-gap: 2rem;
+
+    img {
+      width: 15rem;
+      height: 15rem;
+      border-radius: 50%;
+    }
+
+    & > div {
+      flex-grow: 1;
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 3rem;
+      row-gap: 2rem;
+
+      p {
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .bio {
+    margin-top: 2rem;
+  }
+}

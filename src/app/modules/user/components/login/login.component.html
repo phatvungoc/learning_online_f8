@@ -1,0 +1,156 @@
+<div class="H__container-fluid">
+  <!-- CARD -->
+  <div class="H__card">
+    <!-- BACK BUTTON -->
+    <div
+      class="H__card__back-btn"
+      *ngIf="currentCard === 'login'"
+      (click)="onSwitchCardBody('home')"
+    >
+      <span>
+        <i class="fas fa-chevron-left"></i>
+      </span>
+    </div>
+
+    <!-- CARD HEADER -->
+    <div class="H__card-header">
+      <a [routerLink]="['/']">
+        <img
+          src="https://accounts.fullstack.edu.vn/assets/icon/f8_icon.png"
+          alt="logo"
+        />
+      </a>
+
+      <ng-container [ngSwitch]="currentCard">
+        <ng-container *ngSwitchCase="'home'">
+          <h1 class="H__card-header__title">Chào mừng đến với F8</h1>
+        </ng-container>
+        <ng-container *ngSwitchCase="'login'">
+          <h1 class="H__card-header__title">Đăng nhập vào F8</h1>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- CARD BODY - HOME -->
+    <div class="H__card-body" *ngIf="currentCard === 'home'; else loginForm">
+      <div class="H__card-body__email" (click)="onSwitchCardBody('login')">
+        <i class="far fa-user"></i>
+        <span>Sử dụng email</span>
+      </div>
+      <div class="H__card-body__google">
+        <img
+          src="https://accounts.fullstack.edu.vn/assets/images/signin/google-18px.svg"
+          alt="google icon"
+        />
+        <span>Tiếp tục với Google</span>
+      </div>
+      <div class="H__card-body__facebook">
+        <img
+          src="https://accounts.fullstack.edu.vn/assets/images/signin/facebook-18px.svg"
+          alt="facebook icon"
+        />
+        <span>Tiếp tục với Facebook</span>
+      </div>
+      <div class="H__card-body__github">
+        <img
+          src="https://accounts.fullstack.edu.vn/assets/images/signin/github-18px.svg"
+          alt="github icon"
+        />
+        <span>Tiếp tục với Github</span>
+      </div>
+    </div>
+
+    <ng-container [ngSwitch]="currentCard">
+      <ng-container *ngSwitchCase="'home'"> </ng-container>
+
+      <!-- CARD BODY - FORM -->
+      <ng-template #loginForm>
+        <div class="H__card-body--form">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- EMAIL -->
+            <div>
+              <input
+                type="email"
+                class="H__card-body--form__input"
+                placeholder="Email *"
+                formControlName="email"
+                [ngClass]="email.invalid && email.touched ? 'invalid' : ''"
+              />
+              <div *ngIf="email.touched" class="error-messages">
+                <span
+                  *ngIf="email.hasError('email') || email.hasError('pattern')"
+                  >Email không hợp lệ</span
+                >
+                <span *ngIf="email.hasError('required')"
+                  >Email không được trống</span
+                >
+              </div>
+            </div>
+            <!-- PASSWORD -->
+            <div>
+              <input
+                type="password"
+                class="H__card-body--form__input"
+                placeholder="Mật khẩu *"
+                formControlName="password"
+                [ngClass]="
+                  password.invalid && password.touched ? 'invalid' : ''
+                "
+              />
+              <div *ngIf="password.touched" class="error-messages">
+                <span
+                  *ngIf="
+                    password.hasError('minlength') ||
+                    password.hasError('maxlength')
+                  "
+                  >Mật khẩu chứa 8 - 20 kí tự</span
+                >
+                <span
+                  *ngIf="
+                    password.hasError('pattern') &&
+                    !password.hasError('minlength') &&
+                    !password.hasError('maxlength')
+                  "
+                  >Mật khẩu chỉ chứa chữ và số</span
+                >
+                <span *ngIf="password.hasError('required')"
+                  >Mật khẩu không được trống</span
+                >
+              </div>
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <button
+              type="submit"
+              class="H__card-body--form__button"
+              [disabled]="form.invalid"
+              [ngClass]="form.invalid ? 'invalid' : ''"
+            >
+              Đăng nhập
+            </button>
+          </form>
+          <div *ngIf="errorMessage" class="error-message">
+            Email hoặc Mật khẩu không chính xác!
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <!-- CARD FOOTER -->
+
+    <ng-container *ngIf="currentCard !== 'password'">
+      <div class="H__card-footer">
+        <span>Bạn chưa có tài khoản?</span>
+        <a routerLink="/user/register">Đăng ký</a>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- SOCIAL LINK -->
+  <div class="H__social-link">
+    <a href="#">Giới thiệu về F8</a>
+    <span>|</span>
+    <a href="#">F8 trên Youtube</a>
+    <span>|</span>
+    <a href="#">F8 trên Facebook</a>
+  </div>
+</div>

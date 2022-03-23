@@ -1,0 +1,26 @@
+<div class="H__container">
+  <div class="close-btn" (click)="onReturnHomeDashboard()">
+    <i class="fas fa-times"></i>
+  </div>
+  <div
+    *ngIf="displayedComponent === 'details' || displayedComponent === 'edit'"
+    class="back-btn"
+    (click)="onReturnPreviousComponent()"
+  >
+    <i class="fas fa-angle-left"></i>
+  </div>
+
+  <ng-container [ngSwitch]="displayedComponent">
+    <ng-container *ngSwitchCase="'list'">
+      <app-student-list></app-student-list>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'details'">
+      <app-student-details></app-student-details>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'edit'">
+      <app-student-edit></app-student-edit>
+    </ng-container>
+  </ng-container>
+</div>

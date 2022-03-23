@@ -1,0 +1,110 @@
+<div class="course-notes course-pane">
+  <div class="course-notes-zone">
+    <div class="course-notes-create">
+      <ng-container *ngIf="isCreateNoteBtn===false; else createNoteBtn">
+        <div class="course-notes-createBtn" (click)="handleOpenNoteEditor(); handlePauseVideo()">
+          <span>Tạo ghi chú tại {{changeToTime(videoProg)}}</span>
+          <i class="fas fa-plus-circle icon-plus"></i>
+        </div>
+      </ng-container>
+      <ng-template #createNoteBtn>
+        <div class="course-notes-createNoteEditor">
+          <div class="course-notes-createContent">
+            <div class="course-notes-itemTime">{{changeToTime(videoProg)}}</div>
+            <div class="course-notes-editorWrapper">
+              <div class="course-notes-editorToolbar">
+                <div class="rwd-block-wrapper">
+                  <div class="rwd-dropdown-wrapper">
+                    <a class="rwd-dropdown-selectedText" (click)="toggleMenu(); preventCloseOnClick()">
+                      <span>{{selectedText}}</span>
+                      <div class="rwd-dropdown-carettopen"></div>
+                    </a>
+                    <ul class="rwd-dropdown-optionwrapper" (click)="preventCloseOnClick()" *ngIf="menuOpen">
+                      <li class="rwd-dropdownoption" [class.rwd-dropdownoption-active]="selectedText===option"
+                        *ngFor="let option of selectedTextArray" (click)="handleChooseOption(option)">
+                        {{option}}</li>
+                    </ul>
+                  </div>
+                  <div class="rwd-inline-wrapper">
+                    <button type="button" data-cmd="bold" class="btn-option" (click)="handleChooseStyleNote('bold')">
+                      <i class="fas fa-bold"></i>
+                    </button>
+                    <button type="button" data-cmd="italic" class="btn-option"
+                      (click)="handleChooseStyleNote('italic')">
+                      <i class="fas fa-italic"></i>
+                    </button>
+                    <button type="button" data-cmd="insertUnorderedList" class="btn-option"
+                      (click)="handleChooseStyleNote('insertUnorderedList')">
+                      <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button type="button" data-cmd="insertOrderedList" class="btn-option"
+                      (click)="handleChooseStyleNote('insertOrderedList')">
+                      <i class="fas fa-list-ol"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="course-notes-editor-input">
+                <div class="input-editor" contenteditable="true" name="textField" (input)="handleInputEditor($event)">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="course-notes-editorActions">
+            <div class="course-notes-editorActionsBtn cancelActionBtn"
+              (click)="isCreateNoteBtn=false; handlePlayVideo()">Hủy bỏ
+            </div>
+            <div class="course-notes-editorActionsBtn createActionBtn note-off" [class.note-off]="!isTypingNotes"
+              [class.note-on]="isTypingNotes" (click)="handleCreateNote(); isCreateNoteBtn=false">Tạo
+              ghi chú</div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="course-notes-separator"></div>
+    <ul class="course-notes-list">
+      <div class="course-notes-list-header">
+        <select class="note_selectable">
+          <option value="chapter">Trong chương hiện tại</option>
+          <option value="course">Trong tất cả các chương</option>
+        </select>
+        <select class="note_selectable">
+          <option value="latest">Mới nhất</option>
+          <option value="oldest">Cũ nhất</option>
+        </select>
+      </div>
+      <ng-container *ngFor="let note of notes">
+        <li class="note_item" *ngIf="isDisplayingNote; else noResult">
+          <div class="note_itemHead">
+            <div class="note_itemTime" (click)="changeTimeLineToSeconds(note.timeLine)">
+              {{displayTimeLine(note)}}</div>
+            <div class="note_titleWrap">
+              <div class="note_itemTitle">Giới thiệu</div>
+              <div class="note_itemDesc">{{note.lessionName}}</div>
+            </div>
+            <div class="note_itemCtrl">
+              <div class="note_itemCtrlBtn">
+                <i class="fas fa-pen"></i>
+              </div>
+              <div class="note_itemCtrlBtn">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </div>
+          <div class="note_itemContent">
+            <p>{{note.content}}</p>
+          </div>
+        </li>
+      </ng-container>
+      <ng-template #noResult>
+        <div class="course-notes-list-noResult">
+          <img src="https://fullstack.edu.vn/assets/images/no_note_yet.svg" alt="Chưa có ghi chú">
+          <div class="course-notes-list-noResult-title">Bạn chưa có ghi chú nào</div>
+          <div class="course-notes-list-noResult-description">Hãy ghi chép để nhớ những gì bạn đã học!
+          </div>
+        </div>
+      </ng-template>
+
+    </ul>
+  </div>
+</div>

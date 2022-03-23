@@ -1,0 +1,284 @@
+<app-header></app-header>
+<div class="main">
+  <app-sidebar></app-sidebar>
+
+  <!-- HOME -->
+  <div class="home-page-wrapper">
+    <div class="container-fluid">
+      <!-- SLIDER -->
+      <div class="row">
+        <div class="col col-12">
+          <app-slider></app-slider>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="row">
+        <div class="col col-12">
+          <div class="content-container">
+            <!-- COURSES -->
+            <div class="home-page-content-item">
+              <p class="content-item-subheading">
+                <strong>152.935+</strong>
+                người khác cũng học
+              </p>
+
+              <div
+                *ngIf="
+                  !isAuthenticated ||
+                    (isAuthenticated && loadedCourses.length === 0);
+                  then thenBlock;
+                  else elseBlock
+                "
+              ></div>
+              <ng-template #thenBlock>
+                <div
+                  class="content-item-heading-wrapper d-flex justify-content-between align-items-baseline"
+                >
+                  <h2 class="content-item-heading">Khóa học nổi bật</h2>
+                  <a class="content-item-viewall" [routerLink]="['/courses']"
+                    >Xem tất cả <i class="fas fa-angle-right"></i
+                  ></a>
+                </div>
+                <div class="content-item-container">
+                  <div class="courses-wrapper">
+                    <!-- ARROW LEFT BUTTON -->
+                    <div
+                      class="btn-arrow btn-arrow-left d-none d-md-block d-lg-block"
+                      appScrollLeft
+                    >
+                      <i class="fas fa-angle-left"></i>
+                    </div>
+
+                    <div class="home-courses-container d-flex">
+                      <!-- COURSE LOOP -->
+                      <div
+                        class="home-course-item"
+                        *ngFor="let course of outStandingCourses; let i = index"
+                        style="cursor: pointer"
+                        [routerLink]="['/courses', course.hashCode]"
+                      >
+                        <div class="course-item-container">
+                          <div
+                            class="course-item-thumb"
+                            style="background-image: url('https://localhost:5001/Thumbnail/{{
+                              course.image
+                            }}');"
+                          ></div>
+                          <div class="course-item-title">
+                            <a>{{ course.title }} </a>
+                          </div>
+                          <div
+                            class="course-item-count"
+                            *ngIf="!isAuthenticated"
+                          >
+                            <i class="fas fa-users"></i> &nbsp;
+                            <span>{{ course.totalStudent }} </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ARROW RIGHT BUTTON -->
+                    <div
+                      class="btn-arrow btn-arrow-right d-none d-md-block d-lg-block"
+                      appScrollRight
+                    >
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #elseBlock>
+                <div
+                  class="content-item-heading-wrapper d-flex justify-content-between align-items-baseline"
+                >
+                  <h2 class="content-item-heading">Khóa đang học</h2>
+                  <a class="content-item-viewall" [routerLink]="['/courses']"
+                    >Xem tất cả <i class="fas fa-angle-right"></i
+                  ></a>
+                </div>
+                <div class="content-item-container">
+                  <div class="courses-wrapper">
+                    <!-- ARROW LEFT BUTTON -->
+                    <div
+                      class="btn-arrow btn-arrow-left d-none d-md-block d-lg-block"
+                      appScrollLeft
+                    >
+                      <i class="fas fa-angle-left"></i>
+                    </div>
+
+                    <div class="home-courses-container d-flex">
+                      <!-- COURSE LOOP -->
+                      <div
+                        class="home-course-item"
+                        *ngFor="let course of loadedCourses; let i = index"
+                        style="cursor: pointer"
+                        [routerLink]="['/learning', course.hashCode]"
+                      >
+                        <div class="course-item-container">
+                          <div
+                            class="course-item-thumb"
+                            style="background-image: url('https://localhost:5001/Thumbnail/{{
+                              course.image
+                            }}');"
+                          ></div>
+                          <div class="course-item-title">
+                            <a>{{ course.title }} </a>
+                          </div>
+                          <div
+                            class="course-item-count"
+                            *ngIf="!isAuthenticated"
+                          >
+                            <i class="fas fa-users"></i> &nbsp;
+                            <span>{{ course.totalStudent }} </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ARROW RIGHT BUTTON -->
+                    <div
+                      class="btn-arrow btn-arrow-right d-none d-md-block d-lg-block"
+                      appScrollRight
+                    >
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+
+            <!-- POSTS -->
+            <div class="home-page-content-item">
+              <div
+                class="content-item-heading-wrapper d-flex justify-content-between align-items-baseline"
+              >
+                <h2 class="content-item-heading">Bài viết nổi bật</h2>
+                <a class="content-item-viewall" [routerLink]="['/courses']"
+                  >Xem tất cả <i class="fas fa-angle-right"></i
+                ></a>
+              </div>
+
+              <div class="content-item-container">
+                <div class="courses-wrapper">
+                  <!-- ARROW LEFT BUTTON -->
+                  <div
+                    class="btn-arrow btn-arrow-left d-none d-md-block d-lg-block"
+                    appScrollLeft
+                  >
+                    <i class="fas fa-angle-left"></i>
+                  </div>
+
+                  <!-- POSTS CONTAINER -->
+                  <div class="posts-container d-flex">
+                    <!-- POST ITEM -->
+                    <div
+                      class="post-item-wrapper"
+                      *ngFor="let item of fakeArray"
+                    >
+                      <div class="post-item-container">
+                        <div
+                          class="post-item-thumb"
+                          style="
+                            background-image: url('https://cdn.fullstack.edu.vn/f8-production/blog_posts/1671/61b6368a3a089.jpg');
+                          "
+                        ></div>
+                        <div class="post-item-title">
+                          <a href="#"> Thời gian và Động lực</a>
+                        </div>
+                        <div class="post-item-author">
+                          <a href=""
+                            ><img
+                              src="https://cdn.fullstack.edu.vn/f8-production/user_avatars/9143/616309bb2f85f.png"
+                              alt=""
+                          /></a>
+                          <a href="">
+                            <strong>Dong Ngo</strong> <span> .</span>
+                            <span> một tháng trước</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ARROW RIGHT BUTTON -->
+                  <div
+                    class="btn-arrow btn-arrow-right d-none d-md-block d-lg-block"
+                    appScrollRight
+                  >
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIDEOS -->
+            <div class="home-page-content-item">
+              <div
+                class="content-item-heading-wrapper d-flex justify-content-between align-items-baseline"
+              >
+                <h2 class="content-item-heading">Video nổi bật</h2>
+                <a class="content-item-viewall" [routerLink]="['/courses']"
+                  >Xem tất cả <i class="fas fa-angle-right"></i
+                ></a>
+              </div>
+
+              <div class="content-item-container">
+                <div class="courses-wrapper">
+                  <!-- ARROW LEFT BUTTON -->
+                  <div
+                    class="btn-arrow btn-arrow-left d-none d-md-block d-lg-block"
+                    appScrollLeft
+                  >
+                    <i class="fas fa-angle-left"></i>
+                  </div>
+
+                  <!-- VIDEOS CONTAINER -->
+                  <div class="videos-container d-flex">
+                    <div
+                      class="video-item-wrapper"
+                      *ngFor="let item of fakeArray"
+                    >
+                      <div class="video-item-container">
+                        <div
+                          class="video-item-thumb"
+                          style="
+                            background-image: url('https://i.ytimg.com/vi/sgq7BH6WxL8/hqdefault.jpg');
+                          "
+                        ></div>
+                        <div class="video-item-title">
+                          <a href="#"> Thời gian và Động lực</a>
+                        </div>
+                        <div class="video-item-stats d-flex">
+                          <div>
+                            <i class="fas fa-eye"></i><span>214.680</span>
+                          </div>
+                          <div>
+                            <i class="fas fa-thumbs-up"></i><span>4.757</span>
+                          </div>
+                          <div>
+                            <i class="fas fa-comment"></i><span>169</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ARROW RIGHT BUTTON -->
+                  <div
+                    class="btn-arrow btn-arrow-right d-none d-md-block d-lg-block"
+                    appScrollRight
+                  >
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

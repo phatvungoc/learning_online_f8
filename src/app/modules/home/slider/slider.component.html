@@ -1,0 +1,108 @@
+<div class="slider-container">
+  <div
+    id="slider"
+    class="carousel slide"
+    data-bs-ride="carousel"
+    data-bs-touch="true"
+  >
+    <!-- SLIDER -->
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        [ngClass]="i === 0 ? 'active' : ''"
+        *ngFor="let slider of sliders; let i = index"
+      >
+        <div
+          class="slider-item"
+          [ngStyle]="{
+            background:
+              i === 2
+                ? 'linear-gradient(to right, rgb(254, 33, 94), rgb(255, 148, 2))'
+                : ''
+          }"
+        >
+          <div class="slider-left">
+            <h2 class="slider-heading">
+              <a href="">{{ slider.heading }}</a>
+            </h2>
+            <p class="slider-desc">
+              {{ slider.descripion }}
+            </p>
+            <div class="slider-btn">
+              <a *ngIf="i <= 1" [routerLink]="slider.url">{{
+                slider.button
+              }}</a>
+              <a *ngIf="i > 1" [href]="slider.url">{{ slider.button }}</a>
+            </div>
+          </div>
+          <div class="slider-right">
+            <a *ngIf="i <= 1" [routerLink]="slider.url">
+              <img src="{{ slider.image }}" />
+            </a>
+            <a *ngIf="i > 1" [href]="slider.url">
+              <img src="{{ slider.image }}" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROW BUTTONS -->
+    <div
+      class="btn-arrow btn-arrow-left d-none d-md-block d-lg-block"
+      type="button"
+      data-bs-target="#slider"
+      data-bs-slide="prev"
+    >
+      <i class="fas fa-angle-left"></i>
+    </div>
+    <div
+      class="btn-arrow btn-arrow-right d-none d-md-block d-lg-block"
+      type="button"
+      data-bs-target="#slider"
+      data-bs-slide="next"
+    >
+      <i class="fas fa-angle-right"></i>
+    </div>
+
+    <!-- SLIDER DOTS -->
+    <div class="carousel-indicators">
+      <div class="slider-dots">
+        <button
+          type="button"
+          class="active"
+          data-bs-target="#slider"
+          data-bs-slide-to="0"
+          aria-current="true"
+          aria-label="Slide 1"
+        >
+          1
+        </button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        >
+          2
+        </button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        >
+          3
+        </button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="3"
+          aria-label="Slide 4"
+        >
+          4
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

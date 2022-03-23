@@ -1,0 +1,224 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+///////////////////////////
+///////////////////////////
+.H__container-fluid {
+  min-height: 100vh;
+  background: url("https://accounts.fullstack.edu.vn/static/media/f8_bg_auth_1920.b517075e98f3051de678.png")
+    center left/cover no-repeat;
+  position: relative;
+  padding: 3.2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.H__card {
+  position: relative;
+  z-index: 999;
+  background: #fff;
+  width: 90%;
+  max-width: 64rem;
+  min-height: 60rem;
+  margin: 0 auto;
+  padding: 4.8rem 1.6rem;
+  border-radius: 0.8rem;
+
+  .H__card__back-btn {
+    position: absolute;
+    font-size: 2rem;
+    top: 3.2rem;
+    left: 3.2rem;
+    cursor: pointer;
+  }
+
+  // CARD HEADER
+  &-header {
+    text-align: center;
+
+    img {
+      display: inline-block;
+      width: 4.4rem;
+      height: 4.4rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #292929;
+      margin: 2rem 0;
+    }
+  }
+
+  // CARD BODY - HOME
+  &-body {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      width: 100%;
+      max-width: 40rem;
+      background: transparent;
+      border: 2px solid #dce0e3;
+      border-radius: 100rem;
+      margin-bottom: 1.6rem;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+
+      &:hover {
+        background: #dce0e3;
+      }
+
+      i,
+      img {
+        font-size: 2rem;
+        line-height: 2.4rem;
+        position: absolute;
+        width: 2.4rem;
+        height: 2.4rem;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+      }
+
+      span {
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 4rem;
+        color: #35414c;
+      }
+    }
+  }
+
+  // CARD BODY - FORM
+  &-body--form {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    form {
+      width: 100%;
+      max-width: 40rem;
+
+      & > div {
+        margin-bottom: 1.6rem;
+      }
+
+      .H__card-body--form__input {
+        padding: 1.1rem 1.6rem;
+        width: 100%;
+        border-radius: 100rem;
+        border: 2px solid #dce0e3;
+        background: #f3f5f7;
+        font-size: 1.6rem;
+
+        &:focus {
+          outline-color: #b5b8bb;
+        }
+
+        &.invalid {
+          border: 2px solid #f05123;
+
+          &:focus {
+            outline-color: #f05123;
+          }
+        }
+      }
+
+      .error-messages {
+        margin-left: 1.7rem;
+        font-size: 1.2rem;
+        color: #f05123;
+      }
+
+      .H__card-body--form__button {
+        height: 4.5rem;
+        width: 100%;
+        margin-bottom: 0;
+        border: none;
+        border-radius: 100rem;
+        background: linear-gradient(to right, #95e7fb, #91eee2);
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: 500;
+
+        &.invalid {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  // ERROR MESSAGE
+  .error-message {
+    font-size: 1.4rem;
+    color: #f05123;
+    margin-top: 1rem;
+  }
+
+  // CARD FOOTER
+  &-footer {
+    padding: 2.4rem 1.6rem 0 1.6rem;
+    margin-top: 1.6rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #000;
+
+    a {
+      color: #f05123;
+      font-weight: 500;
+      margin-left: 0.4rem;
+    }
+  }
+}
+
+.H__social-link {
+  margin-top: 1.2rem;
+  text-align: center;
+  position: relative;
+  z-index: 999;
+
+  a,
+  span {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  span {
+    margin: 0 0.8rem;
+  }
+}

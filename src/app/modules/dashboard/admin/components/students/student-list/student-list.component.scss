@@ -1,0 +1,87 @@
+@import "../../../shared/scss/common";
+
+form {
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+  input,
+  select {
+    height: 4rem;
+    border-radius: 0.5rem;
+    border: 1px solid #666;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #333;
+    }
+  }
+
+  input {
+    width: 30rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  select {
+    width: 10rem;
+  }
+
+  button {
+    height: 4rem;
+    width: 6rem;
+    border-radius: 0.5rem;
+    border: 1px solid #666;
+    &:hover {
+      background: #cfcfcf;
+    }
+  }
+
+  .get-all-btn {
+    background: #333;
+    border: 1px solid #333;
+    color: #fff;
+    margin-left: auto;
+    &:hover {
+      background: #fff;
+      color: #333;
+    }
+    @media screen and (max-width: 768px) {
+      margin-left: unset;
+      margin-right: auto;
+    }
+  }
+}
+
+.H__pagination {
+  font-size: 1.6rem;
+  text-align: right;
+  margin-top: 2rem;
+
+  &--top {
+    @media screen and (min-width: 769px) {
+      display: none;
+    }
+  }
+}
+
+.H__body {
+  overflow-x: auto;
+  table {
+    min-width: 100rem;
+
+    td {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      button {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

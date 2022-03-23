@@ -1,0 +1,107 @@
+<header class="H__header">
+  <div class="H__header__back-btn" [routerLink]="['/']"><i class="fas fa-chevron-left"></i></div>
+  <a [routerLink]="['/']" class="H__header__logo">
+    <img
+      src="https://fullstack.edu.vn/assets/images/f8_text_logo.png"
+      alt="logo"
+    />
+  </a>
+
+  <div class="H__header__divider"></div>
+
+  <div class="H__header__title">{{ titleCourses }}</div>
+
+  <div class="H__header__guide">
+    <i class="fas fa-question-circle"></i>
+    <span>Hướng dẫn</span>
+  </div>
+</header>
+
+<main>
+  <div class="main-wrapper" [class.video_change] = "videoVariable">
+    <div class="H__learning-video">
+      <div class="H__learning-video__wrapper">
+        <youtube-player
+          id="videoPlayer" 
+          [videoId]="videoId" 
+          suggestedQuality="highres" class="video-current"
+          #player 
+          >
+        </youtube-player>
+      </div>
+    </div>
+
+    <div class="sub-video__scroll" *ngIf="videoVariable">
+      <div class="sub-video__scroll__title">{{ titleLessionScroll }}</div>
+      <div class="sub-video__scroll__sub-title">{{ titleCourses }}</div>
+      <div class="sub-video__scroll__duration">{{ durationCurrentTime }} / {{ durationTotalTime }}</div>
+    </div>
+
+    <div class="H__learning-tabs">
+      <div
+        id="H__learning-tabs--course"
+        class="content-tab"
+        (click)="onChangeTab('content')"
+        [ngClass]="currentTab === 'content' ? 'active-tab' : ''"
+      >
+        Nội dung
+      </div>
+      <div
+        (click)="onChangeTab('overview')"
+        [ngClass]="currentTab === 'overview' ? 'active-tab' : ''"
+        id="H__learning-tabs--overview"
+      >
+        Tổng quan
+      </div>
+      <div
+        (click)="onChangeTab('note')"
+        [ngClass]="currentTab === 'note' ? 'active-tab' : ''"
+        id="H__learning-tabs--note"
+      >
+        Ghi chú
+      </div>
+      <div
+        (click)="onChangeTab('related')"
+        [ngClass]="currentTab === 'related' ? 'active-tab' : ''"
+        id="H__learning-tabs--related"
+      >
+        Liên quan (1)
+      </div>
+    </div>
+
+    <div class="H__placeholder">
+      <div #lessonList>
+        <div class="H__learning-playlist">
+          <app-lesson-list (sendLinkToGeneral)="getLinkLessionCurrent($event)" #lessionList></app-lesson-list>
+        </div>
+      </div>
+
+      <ng-container [ngSwitch]="currentTab">
+        <ng-container *ngSwitchCase="'overview'">
+          <div class="H__learning-tab__container">
+            <app-overview></app-overview>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'note'">
+          <div class="H__learning-tab__container">
+            <app-note></app-note>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'related'">
+          <div class="H__learning-tab__container">
+            <app-related></app-related>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</main>
+
+<footer class="H__main-footer">
+  <a href="#">
+    <h2>Fullstack.edu.vn</h2>
+  </a>
+  <div class="copyright">
+    Made with <i class="fas fa-heart-broken"></i> <span>.</span> Powered by F8
+  </div>
+</footer>

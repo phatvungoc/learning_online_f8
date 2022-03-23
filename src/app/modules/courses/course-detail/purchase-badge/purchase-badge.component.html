@@ -1,0 +1,65 @@
+<div class="purchase-badge-wrapper">
+  <div class="purchase-badge-container">
+    <div
+      class="course-preview d-none d-lg-block"
+      data-bs-toggle="modal"
+      data-bs-target="#myModal"
+    >
+      <div
+        class="course-preview-image"
+        style="
+          background-image: url('https://cdn.fullstack.edu.vn/f8-production/courses/2.png');
+        "
+      ></div>
+      <i class="fas fa-play-circle"></i>
+      <p>Xem giới thiệu khóa học</p>
+    </div>
+    <div
+      *ngIf="isAuthenticated && isStudied; then thenBlock; else elseBlock"
+    ></div>
+    <ng-template #thenBlock>
+      <h5>Đã đăng ký</h5>
+      <div class="button-container">
+        <button
+          type="button"
+          class="course-learn-btn btn text-uppercase"
+          [routerLink]="['/learning', courseHashCode]"
+        >
+          tiếp tục học
+        </button>
+      </div>
+    </ng-template>
+    <ng-template #elseBlock>
+      <h5>Miễn phí</h5>
+      <div class="button-container">
+        <button
+          type="button"
+          class="course-learn-btn btn text-uppercase"
+          (click)="onEnrollFreeCourse()"
+        >
+          đăng ký học
+        </button>
+      </div>
+    </ng-template>
+
+    <ul>
+      <li>
+        <i class="fab fa-leanpub"></i>
+        <span
+          >Tổng số <strong>{{ totalLesson }}</strong> bài học</span
+        >
+      </li>
+      <li>
+        <i class="fas fa-clock fa-w-16"></i>
+        <span
+          >Thời lượng
+          <strong>{{ totalTime[0] }} giờ {{ totalTime[1] }} phút</strong></span
+        >
+      </li>
+      <li>
+        <i class="fas fa-battery-full fa-w-20"></i>
+        <span>Học mọi lúc, mọi nơi</span>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+@import "../../../shared/scss/base";
+@import "../../../shared/scss/varibales";
+
+// COURSE LIST
+.course-list-wrapper {
+  @include main-wrapper();
+
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .course-list-container {
+    margin-left: -8px;
+    margin-right: -8px;
+    @include main-container();
+
+    .course-list-title {
+      color: #000;
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+
+    .course-item {
+      margin-bottom: 48px;
+      .course-item-container {
+        .course-item-thumb {
+          width: 100%;
+          padding-top: 56%;
+          background-size: cover;
+          background-repeat: no-repeat;
+          border-radius: 16px;
+          background-position: 50%;
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .course-item-title {
+          a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #292929;
+            margin: 16px 0 10px 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+          }
+        }
+
+        .course-item-count {
+          font-size: 1.4rem;
+          color: #666;
+        }
+      }
+    }
+  }
+}
+
+// CUSTOM MEDIA PROPETY
+// mobile, tablet
+@media (max-width: 991px) {
+  .course-list-wraper {
+    width: 100% !important;
+  }
+}
+
+// tablet
+@media (min-width: 768px) and (max-width: 991px) {
+  .course-list-wrapper {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+
+// mobile
+@media (max-width: 767px) {
+  .course-list-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+
+    .course-list-container {
+      padding: 0 0 80px !important;
+    }
+  }
+
+  .course-topic-list {
+    .course-detail-list {
+      flex-direction: column;
+      li {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .course-list-container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+// <xl
+@media (max-width: 1199px) {
+}

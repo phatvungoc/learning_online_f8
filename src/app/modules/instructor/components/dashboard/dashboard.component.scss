@@ -1,0 +1,56 @@
+
+.wrapper {
+  min-height: 600px;
+  font-size: 1.6rem;
+  padding: 3em;
+  .heading {
+    font-size: 2em;
+    color: #f05123;
+  }
+  .dashboard__info {
+    margin: 2em;
+    &__item {
+      cursor: pointer;
+      padding: 2em 3em;
+      border-radius: 8px;
+      border-left: .5em solid #f05123;
+      box-shadow: 0px 0px 4px 4px #b1b1b1;
+      h3 {
+        font-size: 2em;
+      }
+      span {
+        font-size: 2em;
+        i {
+          margin-left: .5em;
+          font-size: 1em;
+          color: #7c7c7c;
+        }
+      }
+    }
+  }
+  .dashboard__create-course {
+    margin: 2em;
+    &__title {
+      color: #f05123;
+      font-size: 1.5em;
+    }
+    &__btn {
+      text-decoration: none !important;
+      display: block;
+      font-size: 16px;
+      font-weight: 600px;
+      min-width: 120px;
+      cursor: pointer;
+      text-align: center;
+      background-color: #f05123;
+      line-height: 16px;
+      padding: 16px 20px;
+      border-radius: 4px;
+      color: #ffffff !important;
+      border: 0;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+<app-header></app-header>
+<div class="H__main">
+  <div class="sidebar-container">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="H__admin-dashboard">
+    <div class="row g-0">
+      <div class="col-sm-6 col-md-4 col-lg-3 p-4">
+        <div
+          class="H__field H__field--1"
+          [ngClass]="showedContent === 'students' ? 'active' : ''"
+          (click)="onShowStudents()"
+        >
+          <div class="H__field__index">
+            <h3 *ngIf="adminDashboard">
+              {{ adminDashboard.participantCount }}
+            </h3>
+            <p>Học viên</p>
+          </div>
+          <div class="H__field__icon">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 p-4">
+        <div
+          class="H__field H__field--2"
+          [ngClass]="showedContent === 'instructors' ? 'active' : ''"
+          (click)="onShowInstructors()"
+        >
+          <div class="H__field__index">
+            <h3 *ngIf="adminDashboard">
+              {{ adminDashboard.instructorCount }}
+            </h3>
+            <p>Giáo viên</p>
+          </div>
+          <div class="H__field__icon">
+            <i class="fas fa-users"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 p-4">
+        <div
+          class="H__field H__field--3"
+          [ngClass]="showedContent === 'courses' ? 'active' : ''"
+          (click)="onShowCourses()"
+        >
+          <div class="H__field__index">
+            <h3 *ngIf="adminDashboard">
+              {{ adminDashboard.courseCount }}
+            </h3>
+            <p>Khóa học</p>
+          </div>
+          <div class="H__field__icon">
+            <i class="fas fa-book"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 p-4">
+        <div
+          class="H__field H__field--4"
+          [ngClass]="showedContent === 'approveCourses' ? 'active' : ''"
+          (click)="onShowApproveCourses()"
+        >
+          <div class="H__field__index">
+            <h3 *ngIf="adminDashboard">
+              {{ adminDashboard.courseApprove }}
+            </h3>
+            <p>Khóa học đã duyệt</p>
+          </div>
+          <div class="H__field__icon">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-0 mt-5" [ngSwitch]="showedContent">
+      <ng-container *ngSwitchCase="'general'">
+        <div class="col-md-8 p-4">
+          <app-recent-courses></app-recent-courses>
+        </div>
+        <div class="col-md-4 p-4">
+          <app-top-students></app-top-students>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'students'">
+        <div class="col p-4">
+          <app-student-general-layout
+            (returnHomeDashboard)="onReturn()"
+          ></app-student-general-layout>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'instructors'">
+        <div class="col p-4">
+          <app-instructor-general-layout
+            (returnHomeDashboard)="onReturn()"
+          ></app-instructor-general-layout>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'courses'">
+        <div class="col p-4">
+          <app-course-general-layout
+            (returnHomeDashboard)="onReturn()"
+          ></app-course-general-layout>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'approveCourses'">
+        <div class="col p-4">
+          <app-approve-courses-general-layout
+            (returnHomeDashboard)="onReturn()"
+          ></app-approve-courses-general-layout>
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="showedContent === 'general'">
+      <div class="row g-0 mt-0">
+        <div class="col-lg-8 p-4">
+          <ng-container>
+            <app-events-activities></app-events-activities>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<app-footer></app-footer>

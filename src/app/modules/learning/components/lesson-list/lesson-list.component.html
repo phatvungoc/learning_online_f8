@@ -1,0 +1,72 @@
+<div class="learn-playlist__header">
+    <div class="DL__siderbar">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" [style.width]="lessionProgressCompleted" 
+            [attr.aria-valuenow]="lessionProgressCompletedNow" aria-valuemin="0" aria-valuemax="100">
+          </div>
+          <div class="DL__siderbar__title">
+              <h4>{{ coursesDetail.data?.title }}</h4>
+              <p>Hoàn thành <strong>{{ totalLessionComplete }}</strong>/<strong>{{ totalLession }}</strong>
+                   bài học (<strong>{{ lessionProgressCompleted }}</strong>)</p>
+          </div>
+          <div class="DL__siderbar__title-icon">
+              <span><i class="bi bi-arrow-bar-right"></i></span>
+          </div>
+        </div>
+  
+        <!-- section start -->
+        <div class="DL__siderbar__section">
+            <div class="accordion accordion-flush" id="accordionFlushExample" 
+              *ngFor="let section of coursesDetail.data?.sections; index as indexSection">
+                    <div class="accordion-item" (click)="getQuizzDetail(section.hashCode)">
+                        <h2 class="accordion-header" id="flush-headingOne{{ indexSection }}">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse"
+                            [attr.data-bs-target]="'#flush-collapseOne' + indexSection" 
+                            aria-expanded="false" 
+                            [attr.aria-controls]="'flush-collapseOne' + indexSection">
+                            <div class="d-flex flex-column section__title">
+                                Phần {{ indexSection + 1 }}: {{ section.title }}
+                                <span class="mt-1 section__sub">
+                                    {{ listLessionComplete[indexSection] }}/{{ section.lessions?.length }} | 
+                                    {{ countTotalTimeLession(section.lessions) }}
+                                </span>
+                            </div>
+                        </button>
+                        </h2>
+                        <div id="flush-collapseOne{{ indexSection }}" class="accordion-collapse collapse" 
+                        [attr.aria-labelledby]="'flush-headingOne' + indexSection" 
+                        data-bs-parent="#accordionFlushExample">
+  
+                        <ng-container *ngFor="let lesstion of lessionsList; index as indexLession">
+                            <div class="accordion-body DL__lesstion DL__lesstion1"
+                            (click)="getLessionLink(section, lesstion.link, indexLession, indexSection, lesstion.title)" appActivedLession>
+                                <div class="lesstion__check" style="margin-right: 2rem;">
+                                  <i class="fas fa-check " *ngIf="lesstion.status === 2"></i>
+                                </div>
+                                <div class="lesstion__sub">
+                                    <span>{{ indexLession + 1 }}.{{ lesstion.title }}</span>
+                                    <span class="mt-1">
+                                        <i class="fas fa-play-circle me-3 playCircle"></i>
+                                        <i class="fas fa-compact-disc checkPlay"></i>
+                                        {{ lesstion.duration }}</span>
+                                </div>
+                            </div>
+                            <div class="lesstion__practice d-flex" *ngIf="lesstion.quizzes.length > 0">
+                                <div class="ms-5 mx-3 practice__title">Bài tập</div>
+                                <ng-container *ngFor="let quizz of lesstion.quizzes; index as indexQuizz">
+                                    <div class="practice__icon">
+                                        <div class="playlist_quizz mx-2" (click)="goQuiz(lesstion.hashCode, indexQuizz)">
+                                            <span>{{ indexQuizz + 1 }}</span>
+                                         </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                        </div>
+                    </div>    
+            </div> 
+        </div>
+        <!-- section end -->
+    </div>
+    </div>

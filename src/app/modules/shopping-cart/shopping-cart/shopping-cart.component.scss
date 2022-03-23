@@ -1,0 +1,253 @@
+$color-f8 : #ec5c30;
+$color-f8-hover: #f5b8a6;
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
+
+/////////////////content center//////////////////
+
+.col-1 {
+    flex: 0 0 auto;
+    width: 10.333333%;
+}
+
+.col-xl-2 {
+    flex: 0 0 auto;
+    width: 14.66666667%;
+}
+
+.col-xl-7 {
+    flex: 0 0 auto;
+    width: 53.333333%;
+}
+
+h1 {
+    font-weight: 600;
+    font-family: SuisseWorks,Georgia,Times,times new roman,serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-size: 52px;
+    margin: 2.2rem 0;
+}
+
+.DL__total-course {
+    font-size: 19px;
+}
+
+.DL__content-img {
+    img {
+        width: 131px;
+        height: 72px;
+        cursor: pointer;
+    }
+}
+
+.DL__content-center {
+    padding-left: 39px;
+
+    h6 {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: -2px;
+        cursor: pointer;
+    }
+
+    .DL__content-by {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    .DL__content-rating {
+        background-color: #eceb98;
+        color: #3d3c0a;
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        font-weight: 700;
+        font-size: 13px;
+    }
+
+    .DL__content-rating-star {
+        display: inline-block;
+
+        .count-rating-star {
+            color: #b4690e;
+            font-weight: 700;
+            margin-left: 5px;
+            font-size: 13px;
+        }
+
+        .rating-star {
+            color: #e59819;
+            font-size: 10px;
+            margin: 0 5px;
+        }
+
+        .count-rating-vote {
+            color: #6a6f73;
+            font-weight: 400;
+            font-size: 13px;
+        }
+    }
+}
+
+.DL__content-bottom {
+    color: #6a6f73;
+    font-size: 13px;
+}
+
+.DL__content-wrapper-remove {
+    display: flex;
+    justify-content: right;
+}
+
+.DL__content-remove {
+    padding-right: 15px;
+
+    a {
+        color: $color-f8;
+        font-weight: 400;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+            color: $color-f8-hover;
+        }
+    }
+}
+
+.DL__content-wrapper-save {
+    display: flex;
+    justify-content: right;
+}
+
+.DL__content-save {
+    padding-right: 15px;
+
+    a {
+        color: $color-f8;
+        font-weight: 400;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+            color: $color-f8-hover;
+        }
+    }
+}
+
+.DL__content-price {
+    font-size: 18px;
+    padding: 0;
+    color: $color-f8;
+    font-weight: 700;
+    padding-top: 2px;
+    display: flex;
+
+    span {
+        margin-top: 3px;
+
+        i {
+            margin-left: 7px;
+        }
+    }
+}
+
+.DL__content-container-remove-save {
+    margin-right: 81px;
+    margin-left: -21px;
+}
+
+.list-group {
+    margin-top: 14px;
+}
+
+.list-group-item {
+    padding: 1rem 1rem;
+}
+
+//////////////////Right content//////////////////
+.DL__content-right-total {
+    font-size: 22px;
+}
+
+.DL__content-right-price {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.DL__content-right-btn-checkout {
+    button {
+        font-size: 18px;
+        color: #fff;
+        background-color: $color-f8;
+        width: 100%;
+        border: 1px solid;
+        height: 53px;
+        font-weight: bold;
+        &:hover{
+            background-color: $color-f8-hover;
+        }
+    }
+}
+
+.DL__content-right-promotion {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+.DL__content-right-keep {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: -7px;
+    margin-left: -13px;
+    font-size: 16px;
+
+    button {
+        background-color: transparent;
+        border: 1px solid transparent;
+        font-size: 30px;
+        
+        span {
+            i {
+                color: black;
+            }
+        }
+    }
+
+    span {
+        color: #6a6f73;;
+    }
+}
+
+.DL__content-right-apply {
+    display: flex;
+
+    input {
+        width: 70%;
+        height: 33px;
+        font-size: 14px;
+        padding-left: 10px;
+    }
+
+    button {
+        height: 33px;
+        border: 1px solid transparent;
+        color: #fff;
+        background-color: $color-f8;
+        font-weight: 600;
+        width: 30%;
+        margin-left: -5px;
+        font-size: 14px;
+
+        &:hover{
+            background-color: $color-f8-hover;
+        }
+    }
+}
