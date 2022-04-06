@@ -4,18 +4,12 @@
     <div class="row">
       <div class="col-4">
         <div>
-          <a href="#" class="header__logo"
-            ><img
-              src="https://fullstack.edu.vn/assets/icon/f8_icon.png"
-              alt="f8-logo"
-              width="36px"
-              height="36px"
-          /></a>
+          <a href="#" class="header__logo"><img
+              src="https://static.fullstack.edu.vn/static/media/f8-icon.7ad2b161d5e80c87e516.png" alt="f8-logo"
+              width="36px" height="36px" /></a>
           <h4 class="header__title">Học lập trình để đi làm</h4>
         </div>
-        <a class="header__hamburger-btn" appToggleAltSidebar
-          ><i class="fas fa-bars"></i
-        ></a>
+        <a class="header__hamburger-btn" appToggleAltSidebar><i class="fas fa-bars"></i></a>
         <div class="header__alt-sidebar">
           <ul>
             <li>
@@ -39,56 +33,28 @@
       <div class="col-4">
         <div class="header__search">
           <i class="fas fa-search"></i>
-          <input
-            type="text"
-            class="header__search__input"
-            placeholder="Tìm kiếm khóa học, bài biết, video, ..."
-            [(ngModel)]="inputValue"
-            (keydown)="sendSearchValue($event)"
-          />
+          <input type="text" class="header__search__input" placeholder="Tìm kiếm khóa học, bài biết, video, ..."
+            [(ngModel)]="inputValue" (keydown)="sendSearchValue($event)" />
         </div>
       </div>
       <div class="col-4">
         <div class="header__login">
-          <a class="header__login__alt-search" appToggleSearchInput
-            ><i class="fas fa-search"></i
-          ></a>
-          <a class="header__login__cart"
-            ><i class="fas fa-shopping-cart"></i
-          ></a>
-          <a
-            class="header__login__btn"
-            (click)="moveToLogin()"
-            *ngIf="!isLoggedIn"
-            >Đăng Nhập</a
-          >
+          <a class="header__login__alt-search" appToggleSearchInput><i class="fas fa-search"></i></a>
+          <a class="header__login__cart"><i class="fas fa-shopping-cart"></i></a>
+          <a class="header__login__btn" (click)="moveToLogin()" *ngIf="!isLoggedIn">Đăng Nhập</a>
           <div class="header__login__user" *ngIf="isLoggedIn">
-            <a (click)="toggle()" class="header__login__user__avatar"
-              ><img src="{{ avatarLink }}" alt="" width="40px" height="40px"
-            /></a>
+            <a (click)="toggle()" class="header__login__user__avatar"><img src="{{ avatarLink }}" alt="" width="40px"
+                height="40px" /></a>
           </div>
           <div class="header__login__info" *ngIf="isDisplayed">
             <p class="header__login__info__greeting">
               Xin chào, {{ username }}
             </p>
             <a class="clickable-item" routerLink="/user/settings">Cài đặt</a>
-            <a
-              *ngIf="role === 'Admin'"
-              class="clickable-item"
-              routerLink="/dashboard/admin"
-              >Dashboard</a
-            >
-            <a
-              *ngIf="role === 'Instructor'"
-              class="clickable-item"
-              (click)="moveToInstructorDashboard()"
-              >Quản lý khóa học</a
-            >
-            <a
-              class="header__login__info__logout clickable-item"
-              routerLink="/user/login"
-              >Đăng xuất</a
-            >
+            <a *ngIf="role === 'Admin'" class="clickable-item" routerLink="/dashboard/admin">Dashboard</a>
+            <a *ngIf="role === 'Instructor'" class="clickable-item" (click)="moveToInstructorDashboard()">Quản lý khóa
+              học</a>
+            <a class="header__login__info__logout clickable-item" routerLink="/user/login">Đăng xuất</a>
           </div>
         </div>
       </div>

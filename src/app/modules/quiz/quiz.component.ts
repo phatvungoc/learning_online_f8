@@ -19,6 +19,7 @@ import {
 } from 'src/app/stores/quiz/actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
+import { User } from 'src/app/services/user/models';
 
 @Component({
   selector: 'app-quiz',
@@ -54,7 +55,7 @@ export class QuizComponent implements OnInit {
   quizHashCode: any = '';
   questionHashCode: string | null = '';
 
-  userHashCode: string = '32a3384a-92d4-45f7-bf2f-a3457dfc08da';
+  userHashCode: string = '';
 
   quizChosenId: number = 0;
   isPassed: boolean = false;
@@ -63,13 +64,18 @@ export class QuizComponent implements OnInit {
   checkQuizArr: string[] =
     JSON.parse(localStorage.getItem('checkQuizArr')!) || [];
 
-  userPassedQuiz: any = JSON.parse(localStorage.getItem('userPassedQuiz')!) || {
-    userHashCode: this.userHashCode,
-    quizsPassedHashCode: [],
-    quizsAnswerPassedHashCode: [],
-  };
+  userPassedQuiz: any;
 
   ngOnInit(): void {
+    const currentUser: User = JSON.parse(localStorage.getItem('auth')).user;
+    this.userHashCode = currentUser['HashCode'];
+    this.userPassedQuiz = JSON.parse(
+      localStorage.getItem('userPassedQuiz')!
+    ) || {
+      userHashCode: this.userHashCode,
+      quizsPassedHashCode: [],
+      quizsAnswerPassedHashCode: [],
+    };
     this._route.queryParamMap.subscribe((params) => {
       this.lessionHashCode = params.get('hashCodeLession');
       this.quizHashCode = params.get('hashCodeQuiz');
@@ -77,7 +83,7 @@ export class QuizComponent implements OnInit {
     this.getQuizByLession(this.lessionHashCode);
     this.quizs$.subscribe((quizs: QuizModel[]) => {
       this.quizs = quizs;
-      this.quiz = quizs.find((q) => q.hashCode == this.quizHashCode);
+      this.quiz = this.quizs.find((q) => q.hashCode == this.quizHashCode);
     });
     this.getQuestionByQuiz(this.quizHashCode);
     this.question$.subscribe((questions) => {

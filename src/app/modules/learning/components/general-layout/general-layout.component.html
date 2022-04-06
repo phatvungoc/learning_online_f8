@@ -1,10 +1,7 @@
 <header class="H__header">
   <div class="H__header__back-btn" [routerLink]="['/']"><i class="fas fa-chevron-left"></i></div>
   <a [routerLink]="['/']" class="H__header__logo">
-    <img
-      src="https://fullstack.edu.vn/assets/images/f8_text_logo.png"
-      alt="logo"
-    />
+    <img src="https://fullstack.edu.vn/assets/images/f8_text_logo.png" alt="logo" />
   </a>
 
   <div class="H__header__divider"></div>
@@ -18,15 +15,10 @@
 </header>
 
 <main>
-  <div class="main-wrapper" [class.video_change] = "videoVariable">
+  <div class="main-wrapper" [class.video_change]="videoVariable">
     <div class="H__learning-video">
       <div class="H__learning-video__wrapper">
-        <youtube-player
-          id="videoPlayer" 
-          [videoId]="videoId" 
-          suggestedQuality="highres" class="video-current"
-          #player 
-          >
+        <youtube-player id="videoPlayer" [videoId]="videoId" suggestedQuality="highres" class="video-current" #player>
         </youtube-player>
       </div>
     </div>
@@ -38,33 +30,20 @@
     </div>
 
     <div class="H__learning-tabs">
-      <div
-        id="H__learning-tabs--course"
-        class="content-tab"
-        (click)="onChangeTab('content')"
-        [ngClass]="currentTab === 'content' ? 'active-tab' : ''"
-      >
+      <div id="H__learning-tabs--course" class="content-tab" (click)="onChangeTab('content')"
+        [ngClass]="currentTab === 'content' ? 'active-tab' : ''">
         Nội dung
       </div>
-      <div
-        (click)="onChangeTab('overview')"
-        [ngClass]="currentTab === 'overview' ? 'active-tab' : ''"
-        id="H__learning-tabs--overview"
-      >
+      <div (click)="onChangeTab('overview')" [ngClass]="currentTab === 'overview' ? 'active-tab' : ''"
+        id="H__learning-tabs--overview">
         Tổng quan
       </div>
-      <div
-        (click)="onChangeTab('note')"
-        [ngClass]="currentTab === 'note' ? 'active-tab' : ''"
-        id="H__learning-tabs--note"
-      >
+      <div (click)="onChangeTab('note')" [ngClass]="currentTab === 'note' ? 'active-tab' : ''"
+        id="H__learning-tabs--note">
         Ghi chú
       </div>
-      <div
-        (click)="onChangeTab('related')"
-        [ngClass]="currentTab === 'related' ? 'active-tab' : ''"
-        id="H__learning-tabs--related"
-      >
+      <div (click)="onChangeTab('related')" [ngClass]="currentTab === 'related' ? 'active-tab' : ''"
+        id="H__learning-tabs--related">
         Liên quan (1)
       </div>
     </div>
@@ -79,12 +58,14 @@
       <ng-container [ngSwitch]="currentTab">
         <ng-container *ngSwitchCase="'overview'">
           <div class="H__learning-tab__container">
-            <app-overview></app-overview>
+            <app-overview [lessionHashCode]="currentHashCodeLession"></app-overview>
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'note'">
           <div class="H__learning-tab__container">
-            <app-note></app-note>
+            <app-note [videoProg]="durationCurrent" [lessionHashCode]="currentHashCodeLession"
+              (pause)="handlePauseVideo()" (play)="handlePlayVideo()" (setVideoProg)="handleSetVideoProg($event)">
+            </app-note>
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'related'">

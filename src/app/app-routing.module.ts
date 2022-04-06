@@ -44,6 +44,7 @@ const routes: Routes = [
     path: 'quiz',
     loadChildren: () =>
       import('./modules/quiz/quiz.module').then((m) => m.QuizModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'dashboard',
@@ -54,11 +55,11 @@ const routes: Routes = [
   },
   {
     path: 'instructor',
-    loadChildren: () => 
-    import('./modules/instructor/instructor.module').then(
-      (m) => m.InstructorModule
-    ),
-    canActivate: [InstructorGuard]
+    loadChildren: () =>
+      import('./modules/instructor/instructor.module').then(
+        (m) => m.InstructorModule
+      ),
+    canActivate: [InstructorGuard],
   },
   {
     path: '**',

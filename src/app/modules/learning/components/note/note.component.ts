@@ -5,10 +5,12 @@ import {
   OnInit,
   Output,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { async, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NoteService } from 'src/app/services/note/note.service';
+import { User } from 'src/app/services/user/models';
 import { GetNoteByLession } from 'src/app/stores/note/actions';
 import { NoteModel } from 'src/app/stores/note/models';
 import { NoteState } from 'src/app/stores/note/states';
@@ -28,15 +30,15 @@ export class NoteComponent implements OnInit {
   selectedTextArray = ['Normal', 'H4', 'Blockquote', 'Code'];
   isChangeStyleNote = false;
 
-  userHashCode: string = '32a3384a-92d4-45f7-bf2f-a3457dfc08da';
-  lessionHashCode: string = '49feaadb-b2cc-4116-a7e7-6310076fb378';
+  userHashCode: string = '';
+  @Input() lessionHashCode: string = '';
 
   isDisplayingNote = true;
 
   @Input() videoProg: number = 0;
   @Output() pause = new EventEmitter();
   @Output() play = new EventEmitter();
-  @Output() setVideoProg = new EventEmitter();
+  @Output() setVideoProg = new EventEmitter<number>();
 
   notes!: NoteModel[];
   @Select(NoteState.getNoteState) note$!: Observable<NoteModel[]>;
@@ -63,10 +65,21 @@ export class NoteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const currentUser: User = JSON.parse(localStorage.getItem('auth')).user;
+    this.userHashCode = currentUser['HashCode'];
     this.getListNote(this.lessionHashCode, this.userHashCode);
     this.note$.subscribe((note: NoteModel[]) => {
       this.notes = note;
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('lessionHashCode' in changes) {
+      this.getListNote(this.lessionHashCode, this.userHashCode);
+      this.note$.subscribe((note: NoteModel[]) => {
+        this.notes = note;
+      });
+    }
   }
 
   changeTimeLineToSeconds(timeLine: string) {
@@ -109,24 +122,44 @@ export class NoteComponent implements OnInit {
           this.userHashCode,
           this.lessionHashCode,
           this.noteContent,
-          this.changeSecondToTimeLine(this.videoProg)
+          this.secondsToTime(this.videoProg)
         )
         .subscribe({
           next: (res) => {
             console.log(res);
             this.getListNote(this.lessionHashCode, this.userHashCode);
+            this.handlePlayVideo();
           },
           error: (err) => {
             console.log(err);
           },
         });
     }
-
-    console.log(this.videoProg);
   }
 
-  changeSecondToTimeLine(seconds: number) {
-    return new Date(seconds * 1000).toISOString().substr(11, 8);
+  secondsToTime(sec_num: number) {
+    let h, m, s;
+
+    if (sec_num <= 59) {
+      s = sec_num;
+    }
+    let hours = Math.floor(sec_num / 3600);
+    let minutes = Math.floor((sec_num - hours * 3600) / 60);
+    let seconds = sec_num - hours * 3600 - minutes * 60;
+
+    if (hours < 10) {
+      h = '0' + hours;
+    }
+    if (minutes < 10) {
+      m = '0' + minutes;
+    }
+    if (seconds < 10) {
+      s = '0' + seconds;
+    } else {
+      s = seconds;
+    }
+
+    return h + ':' + m + ':' + s;
   }
 
   toggleMenu() {

@@ -1,7 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { map, Observable } from 'rxjs';
 import { OverviewService } from 'src/app/services/overview/overview.service';
+import { User } from 'src/app/services/user/models';
 import { GetUserDetail } from 'src/app/stores/overview/actions';
 import { UserDetailModel } from 'src/app/stores/overview/models';
 import { UserDetailState } from 'src/app/stores/overview/states';
@@ -33,10 +41,12 @@ export class OverviewComponent implements OnInit {
   hashCodeUserList: any = [];
   @ViewChild('commentInput') commentInput!: ElementRef;
 
-  userHashCode: string = '32a3384a-92d4-45f7-bf2f-a3457dfc08da';
-  lessionHashCode: string = '49feaadb-b2cc-4116-a7e7-6310076fb378';
+  userHashCode: string = '';
+  @Input() lessionHashCode: string = '';
 
   ngOnInit(): void {
+    const currentUser: User = JSON.parse(localStorage.getItem('auth')).user;
+    this.userHashCode = currentUser['HashCode'];
     this.apiService
       .getLessionsByHashCode(this.lessionHashCode, this.userHashCode)
       .pipe(map((data: any) => data.data.comments))
@@ -66,6 +76,40 @@ export class OverviewComponent implements OnInit {
     this.userDetail$.subscribe(
       (user: UserDetailModel) => (this.userDetail = user)
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('lessionHashCode' in changes) {
+      this.apiService
+        .getLessionsByHashCode(this.lessionHashCode, this.userHashCode)
+        .pipe(map((data: any) => data.data.comments))
+        .subscribe(async (comments: any) => {
+          this.comments = await comments.map((comment: any) => ({
+            ...comment,
+            activeReply: false,
+            activeLike: false,
+            isTypingReply: false,
+          }));
+          console.log(this.comments);
+          this.comments.map((comment: any) => {
+            this.hashCodeUserList.push(comment.userHashCode);
+          });
+          this.comments.reverse();
+          for (let hashCodeUser of this.hashCodeUserList) {
+            this.apiService
+              .getUserDetailByHashCode(hashCodeUser)
+              .pipe(map((data: any) => data.data))
+              .subscribe(async (user: any) => {
+                this.userList.push(user);
+              });
+          }
+        });
+
+      this.getUserDetailByHashCode(this.userHashCode);
+      this.userDetail$.subscribe(
+        (user: UserDetailModel) => (this.userDetail = user)
+      );
+    }
   }
 
   displayUserNameComment(hashCode: string) {
@@ -100,8 +144,9 @@ export class OverviewComponent implements OnInit {
         const comment = await commentData.data;
         this.hashCodeUserList.push(comment.userHashCode);
         this.userList.push(this.userDetail);
+        console.log(this.userList);
         this.comments.unshift(comment);
-        this.displayUserNameComment(comment.userHashCode);
+        this.displayUserNameComment(commentData.data.userHashCode);
       });
     this.commentInput.nativeElement.innerText = '';
     this.isComments = false;

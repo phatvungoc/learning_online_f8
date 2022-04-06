@@ -12,14 +12,13 @@ import { ApiService } from 'src/app/services/search/api.service';
   styleUrls: ['./total-course.component.scss'],
 })
 export class TotalCourseComponent implements OnInit {
-
   constructor(
-    private _activatedRoute: ActivatedRoute, 
+    private _activatedRoute: ActivatedRoute,
     private _api: ApiService,
     private _auth: AuthService,
     private _course: CourseService,
     private _router: Router
-  ) { }
+  ) {}
   toggleModal: boolean = false;
   courseHashCode: string;
   index: number;
@@ -28,33 +27,32 @@ export class TotalCourseComponent implements OnInit {
   courseUpdatedData: any;
   ngOnInit(): void {
     this._activatedRoute.queryParamMap
-    .pipe(
-      concatMap( resp => {
-        this.instructorHashCode = resp.get('id');            
-        return this._auth.getUserDetail(this.instructorHashCode); 
-      })
-    ).pipe(
-      concatMap( resp => {
-        const instructorFirstName = resp.data.firstName;
-        return this._api.searchByInstructorName(instructorFirstName);
-      })
-    ).subscribe(resp => {
-      this.coursesList = resp.data;
-      
-    });
+      .pipe(
+        concatMap((resp) => {
+          this.instructorHashCode = resp.get('id');
+          return this._auth.getUserDetail(this.instructorHashCode);
+        })
+      )
+      .pipe(
+        concatMap((resp) => {
+          const instructorFirstName = resp.data.firstName;
+          return this._api.searchByInstructorName(instructorFirstName);
+        })
+      )
+      .subscribe((resp) => {
+        this.coursesList = resp.data;
+      });
   }
   removeCourse(courseHashCode: string) {
-    if(confirm('bạn có muốn xóa khóa học này') == true){
-
-      this._course.deleteCourse(courseHashCode).subscribe(resp => {
+    if (confirm('bạn có muốn xóa khóa học này') == true) {
+      this._course.deleteCourse(courseHashCode).subscribe((resp) => {
         alert(resp.message);
-        this.coursesList.find((item,index) => {
-          if(item.hashCode === courseHashCode) {
-            this.coursesList.splice(index,1);
+        this.coursesList.find((item, index) => {
+          if (item?.hashCode === courseHashCode) {
+            this.coursesList.splice(index, 1);
           }
-        })
-        
-      })
+        });
+      });
     }
   }
   editCourse(courseHashCode: string, index: number) {
@@ -64,13 +62,15 @@ export class TotalCourseComponent implements OnInit {
   }
   getUpdatedData($event: any) {
     this.coursesList.forEach((item, index) => {
-      if(index === $event.index) {
+      if (index === $event.index) {
         item.title = $event.title;
         item.image = $event.image;
       }
-    })
+    });
   }
   updateCourseDetail(courseHashCode: string) {
-    this._router.navigate(['/instructor/update-course-detail'], { queryParams: { hashCode: courseHashCode } });
+    this._router.navigate(['/instructor/update-course-detail'], {
+      queryParams: { hashCode: courseHashCode },
+    });
   }
 }

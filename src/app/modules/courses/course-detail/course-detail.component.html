@@ -3,15 +3,10 @@
     <div class="detail-page-container d-flex">
       <div class="course-wrapper">
         <div class="course-video d-lg-none">
-          <iframe
-            width="699"
-            height="394"
-            src="https://www.youtube.com/embed/R6plN3FvzFY"
-            title="YouTube video player"
+          <iframe width="699" height="394" src="https://www.youtube.com/embed/R6plN3FvzFY" title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+            allowfullscreen></iframe>
         </div>
 
         <h1 class="course-name">{{ loadedData.title }}</h1>
@@ -20,12 +15,8 @@
           {{ loadedData.description }}
         </p>
 
-        <app-purchase-badge
-          [ngClass]="['d-lg-none']"
-          [courseHashCode]="courseHashCode"
-          [totalLesson]="totalLesson"
-          [totalTime]="totalTime"
-        ></app-purchase-badge>
+        <app-purchase-badge [ngClass]="['d-lg-none']" [courseHashCode]="courseHashCode" [totalLesson]="totalLesson"
+          [totalTime]="totalTime"></app-purchase-badge>
 
         <!-- COURSE TOPIC LIST -->
         <div class="course-topic-list">
@@ -45,9 +36,7 @@
           <div class="course-curriculum-header">
             <h3>Nội dung khóa học</h3>
           </div>
-          <div
-            class="course-curriculum-subheader d-flex justify-content-between flex-wrap"
-          >
+          <div class="course-curriculum-subheader d-flex justify-content-between flex-wrap">
             <ul class="ps-0 d-flex">
               <li>
                 <span>{{ sections.length }}</span> phần
@@ -58,17 +47,12 @@
               </li>
               <li class="curriculum-dot">•</li>
               <li>
-                <span
-                  >Thời lượng {{ totalTime[0] }} giờ
-                  {{ totalTime[1] }} phút</span
-                >
+                <span>Thời lượng {{ totalTime[0] }} giờ
+                  {{ totalTime[1] }} phút</span>
               </li>
             </ul>
 
-            <div
-              class="course-curriculum-togglebtn ml-auto"
-              (click)="onToggleAll()"
-            >
+            <div class="course-curriculum-togglebtn ml-auto" (click)="onToggleAll()">
               <span *ngIf="!showAll"> Mở rộng tất cả </span>
               <span *ngIf="showAll"> Thu nhỏ tất cả </span>
             </div>
@@ -79,40 +63,24 @@
             <div id="accordion">
               <!-- SECTION -->
               <div class="card" *ngFor="let section of sections; let i = index">
-                <div
-                  class="card-header"
-                  data-bs-toggle="collapse"
-                  [attr.data-bs-target]="'#heading' + i"
-                  style="cursor: pointer"
-                  (click)="onToggleIndex(i)"
-                >
-                  <div
-                    class="course-curriculum-card-title mb-0 d-flex justify-content-between"
-                  >
+                <div class="card-header" data-bs-toggle="collapse" [attr.data-bs-target]="'#heading' + i"
+                  style="cursor: pointer" (click)="onToggleIndex(i)">
+                  <div class="course-curriculum-card-title mb-0 d-flex justify-content-between">
                     <span class="card-header-icon" *ngIf="!showList[i]">+</span>
                     <span class="card-header-icon" *ngIf="showList[i]">-</span>
 
-                    <span class="course-curriculum-float-left float-start"
-                      ><strong
-                        >{{ i + 1 }}. <span>{{ section.title }}</span></strong
-                      ></span
-                    >
-                    <span class="course-curriculum-float-right float-end"
-                      >{{ section["lessions"].length }} bài học</span
-                    >
+                    <span class="course-curriculum-float-left float-start"><strong>{{ i + 1 }}. <span>{{ section.title
+                          }}</span></strong></span>
+                    <span class="course-curriculum-float-right float-end">{{ section["lessions"].length }} bài
+                      học</span>
                   </div>
                 </div>
 
                 <!-- LESSONS -->
-                <div
-                  id="heading{{ i }}"
-                  class="course-curriculum-card-body collapse"
-                  [ngClass]="showList[i] === true ? 'show' : 'hidden'"
-                >
-                  <div
-                    class="curriculum-lesson-item d-flex justify-content-between"
-                    *ngFor="let lesson of section['lessions']"
-                  >
+                <div id="heading{{ i }}" class="course-curriculum-card-body collapse"
+                  [ngClass]="showList[i] === true ? 'show' : 'hidden'">
+                  <div class="curriculum-lesson-item d-flex justify-content-between"
+                    *ngFor="let lesson of section['lessions']">
                     <i class="fas fa-play-circle"></i>
                     <div class="curriculum-lesson-name">
                       {{ lesson.title }}
@@ -135,22 +103,19 @@
           <ul class="course-detail-list d-flex flex-column ps-0">
             <li class="w-100">
               <i class="fas fa-check"></i>
-              <span
-                >Bạn không cần biết gì hơn nữa, trong khóa học tôi sẽ chỉ cho
+              <span>Bạn không cần biết gì hơn nữa, trong khóa học tôi sẽ chỉ cho
                 bạn những gì bạn cần phải biết
               </span>
             </li>
             <li class="w-100">
               <i class="fas fa-check"></i>
-              <span
-                >Bạn không cần biết gì hơn nữa, trong khóa học tôi sẽ chỉ cho
+              <span>Bạn không cần biết gì hơn nữa, trong khóa học tôi sẽ chỉ cho
                 bạn những gì bạn cần phải biết
               </span>
             </li>
             <li class="w-100">
               <i class="fas fa-check"></i>
-              <span
-                >Bạn không cần biết gì hơn nữa, trong khóa học tôi sẽ chỉ cho
+              <span>Bạn không cần biết gì hơn nữa, trong khóa học tôi sẽ chỉ cho
                 bạn những gì bạn cần phải biết
               </span>
             </li>
@@ -158,25 +123,14 @@
         </div>
 
         <!-- PURCHASE BADGE -->
-        <app-purchase-badge
-          [ngClass]="['d-none', ' d-lg-block', 'd-xl-none']"
-          style="width: 100%; border: none"
-          [courseHashCode]="courseHashCode"
-          [totalLesson]="totalLesson"
-          [totalTime]="totalTime"
-          class="modal-trigger"
-        >
+        <app-purchase-badge [ngClass]="['d-none', ' d-lg-block', 'd-xl-none']" style="width: 100%; border: none"
+          [courseHashCode]="courseHashCode" [totalLesson]="totalLesson" [totalTime]="totalTime" class="modal-trigger">
         </app-purchase-badge>
       </div>
 
       <!-- PURCHASE BADGE -->
-      <app-purchase-badge
-        [ngClass]="['d-none', 'd-xl-block']"
-        [courseHashCode]="courseHashCode"
-        [totalLesson]="totalLesson"
-        [totalTime]="totalTime"
-        class="modal-trigger"
-      >
+      <app-purchase-badge [ngClass]="['d-none', 'd-xl-block']" [courseHashCode]="courseHashCode"
+        [totalLesson]="totalLesson" [totalTime]="totalTime" class="modal-trigger">
       </app-purchase-badge>
     </div>
   </div>
@@ -190,23 +144,13 @@
           <h3>Giới thiệu khóa học</h3>
           <h2>HTML, CSS từ Zero đến Hero</h2>
         </div>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <iframe
-          width="100%"
-          height="480px"
-          src="https://www.youtube.com/embed/R6plN3FvzFY"
-          title="YouTube video player"
+        <iframe width="100%" height="480px" src="https://www.youtube.com/embed/R6plN3FvzFY" title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+          allowfullscreen></iframe>
       </div>
     </div>
   </div>

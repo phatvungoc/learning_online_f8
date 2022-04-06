@@ -1,33 +1,23 @@
 <div class="course-list-wrapper">
   <div class="course-list-container">
-    <div
-      *ngIf="
+    <div *ngIf="
         isAuthenticated && loadedCourses.length;
         then thenBlock;
         else elseBlock
-      "
-    ></div>
+      "></div>
     <ng-template #thenBlock>
       <h2 class="course-list-title">Khóa đang học</h2>
       <div class="row">
-        <div
-          class="col col-12 col-md-4 col-xl-3"
-          *ngFor="let course of loadedCourses; let i = index"
-        >
+        <div class="col col-12 col-md-4 col-xl-3" *ngFor="let course of loadedCourses; let i = index">
           <div class="course-item">
             <div class="course-item-container">
-              <div
-                class="course-item-thumb"
-                style="
-                  background-image: url('https://localhost:5001/Thumbnail/{{
-                  course.image
-                }}');cursor: pointer;"
-                [routerLink]="['/courses', course.hashCode]"
-              ></div>
+              <div class="course-item-thumb" style="
+                  background-image: url('https://localhost:5001/Thumbnail/{{course.image}}');cursor: pointer;"
+                [routerLink]="['/courses', course.hashCode]"></div>
               <div class="course-item-title">
                 <a [routerLink]="['/courses', course.hashCode]">{{
                   course.title
-                }}</a>
+                  }}</a>
               </div>
               <div class="course-item-count">
                 <i class="fas fa-users"></i>&nbsp;
@@ -39,24 +29,16 @@
       </div>
       <h2 class="course-list-title">Khóa học nổi bật</h2>
       <div class="row">
-        <div
-          class="col col-12 col-md-4 col-xl-3"
-          *ngFor="let course of outStandingCourses; let i = index"
-        >
+        <div class="col col-12 col-md-4 col-xl-3" *ngFor="let course of outStandingCourses; let i = index">
           <div class="course-item">
             <div class="course-item-container">
-              <div
-                class="course-item-thumb"
-                style="
-                  background-image: url('https://localhost:5001/Thumbnail/{{
-                  course.image
-                }}');cursor: pointer;"
-                [routerLink]="['/courses', course.hashCode]"
-              ></div>
+              <div class="course-item-thumb" style="
+                  background-image: url('https://localhost:5001/Thumbnail/{{course.image}}');cursor: pointer;"
+                [routerLink]="['/courses', course.hashCode]"></div>
               <div class="course-item-title">
                 <a [routerLink]="['/courses', course.hashCode]">{{
                   course.title
-                }}</a>
+                  }}</a>
               </div>
               <div class="course-item-count">
                 <i class="fas fa-users"></i>&nbsp;
@@ -70,24 +52,16 @@
     <ng-template #elseBlock>
       <h2 class="course-list-title">Khóa học nổi bật</h2>
       <div class="row">
-        <div
-          class="col col-12 col-md-4 col-xl-3"
-          *ngFor="let course of outStandingCourses; let i = index"
-        >
+        <div class="col col-12 col-md-4 col-xl-3" *ngFor="let course of outStandingCourses; let i = index">
           <div class="course-item">
             <div class="course-item-container">
-              <div
-                class="course-item-thumb"
-                style="
-                  background-image: url('https://localhost:5001/Thumbnail/{{
-                  course.image
-                }}');cursor: pointer;"
-                [routerLink]="['/courses', course.hashCode]"
-              ></div>
+              <div class="course-item-thumb" style="
+                  background-image: url('https://localhost:5001/Thumbnail/{{course.image}}');cursor: pointer;"
+                [routerLink]="['/courses', course.hashCode]"></div>
               <div class="course-item-title">
                 <a [routerLink]="['/courses', course.hashCode]">{{
                   course.title
-                }}</a>
+                  }}</a>
               </div>
               <div class="course-item-count">
                 <i class="fas fa-users"></i>&nbsp;

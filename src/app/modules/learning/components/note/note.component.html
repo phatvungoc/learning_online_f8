@@ -3,7 +3,7 @@
     <div class="course-notes-create">
       <ng-container *ngIf="isCreateNoteBtn===false; else createNoteBtn">
         <div class="course-notes-createBtn" (click)="handleOpenNoteEditor(); handlePauseVideo()">
-          <span>Tạo ghi chú tại {{changeToTime(videoProg)}}</span>
+          <span>Tạo ghi chú tại {{secondsToTime(videoProg)}}</span>
           <i class="fas fa-plus-circle icon-plus"></i>
         </div>
       </ng-container>
