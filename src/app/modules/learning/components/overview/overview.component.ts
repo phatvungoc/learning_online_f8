@@ -50,8 +50,8 @@ export class OverviewComponent implements OnInit {
     this.apiService
       .getLessionsByHashCode(this.lessionHashCode, this.userHashCode)
       .pipe(map((data: any) => data.data.comments))
-      .subscribe(async (comments: any) => {
-        this.comments = await comments.map((comment: any) => ({
+      .subscribe((comments: any) => {
+        this.comments = comments.map((comment: any) => ({
           ...comment,
           activeReply: false,
           activeLike: false,
@@ -66,7 +66,7 @@ export class OverviewComponent implements OnInit {
           this.apiService
             .getUserDetailByHashCode(hashCodeUser)
             .pipe(map((data: any) => data.data))
-            .subscribe(async (user: any) => {
+            .subscribe((user: any) => {
               this.userList.push(user);
             });
         }
@@ -83,8 +83,8 @@ export class OverviewComponent implements OnInit {
       this.apiService
         .getLessionsByHashCode(this.lessionHashCode, this.userHashCode)
         .pipe(map((data: any) => data.data.comments))
-        .subscribe(async (comments: any) => {
-          this.comments = await comments.map((comment: any) => ({
+        .subscribe((comments: any) => {
+          this.comments = comments.map((comment: any) => ({
             ...comment,
             activeReply: false,
             activeLike: false,
@@ -99,7 +99,7 @@ export class OverviewComponent implements OnInit {
             this.apiService
               .getUserDetailByHashCode(hashCodeUser)
               .pipe(map((data: any) => data.data))
-              .subscribe(async (user: any) => {
+              .subscribe((user: any) => {
                 this.userList.push(user);
               });
           }
@@ -140,8 +140,8 @@ export class OverviewComponent implements OnInit {
         this.lessionHashCode,
         this.commentInput.nativeElement.innerText
       )
-      .subscribe(async (commentData: any) => {
-        const comment = await commentData.data;
+      .subscribe((commentData: any) => {
+        const comment = commentData.data;
         this.hashCodeUserList.push(comment.userHashCode);
         this.userList.push(this.userDetail);
         console.log(this.userList);

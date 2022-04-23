@@ -18,9 +18,8 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { InstructorModule } from './modules/instructor/instructor.module';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 
-
 @NgModule({
-  declarations: [AppComponent,],
+  declarations: [AppComponent],
   imports: [
     NgxsModule.forRoot(appState, { developmentMode: !environment.production }),
     NgxsLoggerPluginModule.forRoot(),
@@ -35,7 +34,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     SharedModule,
     HttpClientModule,
     InstructorModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

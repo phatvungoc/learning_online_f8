@@ -25,12 +25,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ToggleSearchInputDirective,
     PageNotFoundComponent,
   ],
-  imports: [
-    CommonModule, 
-    RouterModule, 
-    HttpClientModule,
-    FormsModule
-  ],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule],
   exports: [
     HeaderComponent,
     SidebarComponent,
@@ -38,6 +33,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ScrollLeftDirective,
     ScrollRightDirective,
   ],
-  providers:[CourseService]
+  providers: [CourseService],
 })
 export class SharedModule {}

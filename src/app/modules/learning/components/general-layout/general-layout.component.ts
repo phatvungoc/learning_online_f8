@@ -50,6 +50,7 @@ export class GeneralLayoutComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.section$.subscribe((courses: any) => {
       if (courses.data) {
+        console.log(courses.data);
         this.currentHashCodeLession =
           courses?.data?.sections[0]?.lessions[0].hashCode;
         this.titleCourses = courses.data.title;
